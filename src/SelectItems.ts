@@ -471,6 +471,17 @@ export class SelectItems implements AfterViewInit, OnInit {
         }).filter((item, index, items) => items.lastIndexOf(item) === index);
     }
 
+    getSelectedItems(): any[] {
+        const items = this.getItems();
+        const valueItems: any[] = [];
+        items.forEach(item => {
+            const valueItem = this.valueAccessor.get(this.getItemValue(item));
+            if (valueItem)
+                valueItems.push(valueItem);
+        });
+        return valueItems;
+    }
+
     getItems(group?: any) {
         if (!this.items) return [];
 

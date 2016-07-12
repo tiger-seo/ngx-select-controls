@@ -52,7 +52,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
         <h4>Select Dropdown single select with no selection option:</h4>
         <select-dropdown [(ngModel)]="selectedCar2" 
                     [items]="cars"
-                    noSelectionLabel="nothing selected"
+                    [noSelection]="true"
                     labelBy="name"
                     trackBy="name"></select-dropdown>
 
@@ -62,7 +62,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
         <h4>Select Dropdown multiple with select all option:</h4>
         <select-dropdown [(ngModel)]="selectedCars3" 
                     [items]="cars"
-                    selectAllLabel="select all"
+                    [selectAll]="true"
                     labelBy="name"
                     trackBy="name"></select-dropdown>
 
@@ -209,6 +209,17 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
 
         <br/><b>model: </b>
         <pre>{{ notSelectedCar | json }}</pre>
+        
+        <div *ngFor="let item of [1, 2, 3, 4, 5]; let index = index">
+            <h4>Select Dropdown {{ index }}:</h4>
+            <select-dropdown [(ngModel)]="selectedCarsInLoop" 
+                        [items]="cars"
+                        labelBy="name"
+                        trackBy="name"></select-dropdown>
+    
+            <br/><b>model: </b>
+            <pre>{{ selectedCarsInLoop[index] | json }}</pre>
+        </div>
     
 </div>
 `,
@@ -223,6 +234,7 @@ export class Sample1App {
         new Car(4, "Porshe", 1940),
         new Car(4, "Ferrari", 2000)
     ];
+    selectedCarsInLoop: any[] = [];
     selectedCars1: Car[] = [];
     selectedCars2: Car[] = [];
     selectedCars3: Car[] = [];

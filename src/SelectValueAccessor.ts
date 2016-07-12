@@ -117,10 +117,14 @@ export class SelectValueAccessor implements ControlValueAccessor {
     }
 
     has(value: any): boolean {
+        return !!this.get(value);
+    }
+
+    get(value: any): boolean {
         // value = this.extractModelValue(value);
         if (this._model instanceof Array) {
             if (this.trackBy) {
-                return !!this._model.find((i: any) => {
+                return this._model.find((i: any) => {
                     if (this.trackBy instanceof Function) {
                         return (this.trackBy as ((item1: any, item2: any) => boolean))(i, value);
                     } else {
@@ -128,7 +132,7 @@ export class SelectValueAccessor implements ControlValueAccessor {
                     }
                 });
             } else {
-                return !!this._model.find((i: any) => {
+                return this._model.find((i: any) => {
                     return i === value;
                 });
             }
@@ -136,16 +140,16 @@ export class SelectValueAccessor implements ControlValueAccessor {
         } else if (this._model !== null && this._model !== undefined) {
             if (this.trackBy) {
                 if (this.trackBy instanceof Function) {
-                    return (this.trackBy as ((item1: any, item2: any) => boolean))(this._model, value);
+                    return (this.trackBy as ((item1: any, item2: any) => boolean))(this._model, value) ? this._model : undefined;
                 } else {
-                    return this._model[this.trackBy as string] === value[this.trackBy as string];
+                    return this._model[this.trackBy as string] === value[this.trackBy as string] ? this._model[this.trackBy as string] : undefined;
                 }
             } else {
-                return this._model === value;
+                return this._model === value ? this._model : undefined;
             }
         }
         
-        return false;
+        return undefined;
     }
 
     addMany(values: any[]): void {

@@ -110,6 +110,7 @@ export class SelectTagsBoxTemplate {
                 [filter]="filter"
                 [orderBy]="orderBy"
                 [orderDirection]="orderDirection"
+                [selectAll]="selectAll"
                 [selectAllLabel]="selectAllLabel"
                 [disableBy]="disableBy"
                 [customItemTemplates]="selectDropdownTemplate?.itemTemplates">
@@ -400,6 +401,9 @@ export class SelectTags implements OnInit {
 
     @Input()
     unique: boolean = false;
+
+    @Input()
+    selectAll: boolean = false;
 
     @Input()
     selectAllLabel: string;

@@ -19,7 +19,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                 </span>
                 <select-items #listSelectItems
                       [hideControls]="true"
-                      [items]="valueAccessor.model"
+                      [items]="dropdownSelectItems.getSelectedItems()"
                       [labelBy]="valueBy ? listLabelBy : (listLabelBy || labelBy)"
                       [trackBy]="valueBy ? listTrackBy : (listTrackBy || trackBy)"
                       [disabled]="disabled"
@@ -54,7 +54,9 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                     [searchLabel]="searchLabel"
                     [orderBy]="orderBy"
                     [orderDirection]="orderDirection"
+                    [selectAll]="selectAll"
                     [selectAllLabel]="selectAllLabel"
+                    [noSelection]="noSelection"
                     [noSelectionLabel]="noSelectionLabel"
                     [hideControls]="hideControls"
                     [maxModelSize]="maxModelSize"
@@ -229,10 +231,16 @@ export class SelectDropdown {
     limit: number;
 
     @Input()
+    noSelection: boolean = false;
+
+    @Input()
     noSelectionLabel: string;
 
     @Input()
     searchLabel: string;
+
+    @Input()
+    selectAll: boolean = false;
 
     @Input()
     selectAllLabel: string;
