@@ -38,7 +38,8 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
         </div>
         <div dropdown-not-closable-zone>
             <div class="select-dropdown-dropdown-menu dropdown-menu"
-                [class.hidden]="readonly || disabled || (!dropdownSelectItems.getItems().length && !searchBy)">
+                 [class.hidden]="readonly || disabled || (!dropdownSelectItems.getItems().length && !searchBy)"
+                 tabindex="1">
                 <select-items #dropdownSelectItems
                     [(ngModel)]="valueAccessor.model" 
                     (ngModelChange)="onModelChange($event)" 

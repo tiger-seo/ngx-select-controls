@@ -49,7 +49,9 @@ export class AutocompleteDropdownTemplate {
             </div>
         </div>
         <div class="autocomplete-dropdown-menu dropdown-menu"
-            [class.hidden]="!dropdownSelectItems.getItems().length">
+             [class.hidden]="!dropdownSelectItems.getItems().length"
+             dropdown-not-closable-zone 
+             tabindex="1">
             <select-items #dropdownSelectItems
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"
