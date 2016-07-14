@@ -9,7 +9,7 @@ import {
     QueryList,
     Output,
     EventEmitter,
-    ContentChildren, Optional, OnInit
+    ContentChildren, Optional, OnInit, ContentChild
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CheckboxGroup} from "./CheckboxGroup";
@@ -18,7 +18,7 @@ import {RadioItem} from "./RadioItem";
 import {CheckboxItem} from "./CheckboxItem";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectValidator} from "./SelectValidator";
-import {ItemTemplate, ItemTemplateTransclude} from "./ItemTemplate";
+import {ItemTemplate, ItemTemplateTransclude, Items} from "./ItemTemplate";
 import {SelectControlsOptions} from "./SelectControlsOptions";
 
 @Component({
@@ -49,7 +49,8 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                            [checked]="isAllSelected(getItems(group))">
                     <span class="select-items-label">{{ group }}</span>
                 </div>
-                <div class="select-items-group-item" *ngFor="let item of getItems(group); let index = index; let last = last" 
+                <div class="select-items-group-item" 
+                    *ngFor="let item of getItems(group); let index = index; let last = last" 
                     #itemElement
                     [class.active]="active === index"
                     [class.hide-controls]="hideControls"
@@ -353,6 +354,9 @@ export class SelectItems implements AfterViewInit, OnInit {
     @Input()
     customItemTemplates: QueryList<ItemTemplate>;
 
+    @ContentChild(Items)
+    contentItems: Items;
+
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
@@ -390,7 +394,10 @@ export class SelectItems implements AfterViewInit, OnInit {
     getItemTemplates() {
         if (this.customItemTemplates)
             return this.customItemTemplates;
-        
+
+        if (this.contentItems && this.contentItems.itemTemplates)
+            return this.contentItems.itemTemplates;
+
         return this.itemTemplates;
     }
 
@@ -483,9 +490,16 @@ export class SelectItems implements AfterViewInit, OnInit {
     }
 
     getItems(group?: any) {
-        if (!this.items) return [];
+        let items: any[] = this.items;
+        if (!items && this.contentItems && this.contentItems.itemTemplates && this.contentItems.itemTemplates.length) {
+            items = this.contentItems.itemTemplates.toArray().map(itemTemplate => {
+                return itemTemplate.item;
+            });
+        }
+        if (!items)
+            return [];
 
-        let items = this.items.map(item => item);
+        items = items.map(item => item);
         if (this.searchBy && this.keyword) {
             items = items.filter(item => {
                 if (typeof this.searchBy === "string") {

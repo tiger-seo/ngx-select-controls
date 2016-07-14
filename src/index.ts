@@ -1,3 +1,15 @@
+import {Checkbox} from "./Checkbox";
+import {CheckboxItem} from "./CheckboxItem";
+import {CheckboxGroup} from "./CheckboxGroup";
+import {RadioBox} from "./RadioBox";
+import {RadioItem} from "./RadioItem";
+import {RadioGroup} from "./RadioGroup";
+import {SelectItems} from "./SelectItems";
+import {Autocomplete, AutocompleteDropdownTemplate} from "./Autocomplete";
+import {SelectDropdown} from "./SelectDropdown";
+import {SelectTags, SelectTagsDropdownTemplate, SelectTagsBoxTemplate} from "./SelectTags";
+import {ItemTemplate, Items} from "./ItemTemplate";
+
 export * from "./CheckboxGroup";
 export * from "./Checkbox";
 export * from "./CheckboxItem";
@@ -10,25 +22,14 @@ export * from "./SelectDropdown";
 export * from "./SelectTags";
 export * from "./ItemTemplate";
 
-import {Checkbox} from "./Checkbox";
-import {CheckboxItem} from "./CheckboxItem";
-import {CheckboxGroup} from "./CheckboxGroup";
-import {RadioBox} from "./RadioBox";
-import {RadioItem} from "./RadioItem";
-import {RadioGroup} from "./RadioGroup";
-import {SelectItems} from "./SelectItems";
-import {Autocomplete, AutocompleteDropdownTemplate} from "./Autocomplete";
-import {SelectDropdown} from "./SelectDropdown";
-import {SelectTags, SelectTagsDropdownTemplate, SelectTagsBoxTemplate} from "./SelectTags";
-import {ItemTemplate} from "./ItemTemplate";
-
 export const SELECT_CONTROL_DIRECTIVES: [any] = [
     CheckboxGroup,
     CheckboxItem,
     RadioGroup,
     RadioItem, 
     RadioBox, 
-    Checkbox, 
+    Checkbox,
+    Items,
     SelectItems, 
     Autocomplete,
     SelectDropdown,
@@ -36,5 +37,5 @@ export const SELECT_CONTROL_DIRECTIVES: [any] = [
     ItemTemplate,
     SelectTagsDropdownTemplate,
     SelectTagsBoxTemplate,
-    AutocompleteDropdownTemplate
+    AutocompleteDropdownTemplate,
 ];

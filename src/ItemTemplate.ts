@@ -1,4 +1,4 @@
-import {Input, TemplateRef, ViewContainerRef, Directive, QueryList} from "@angular/core";
+import {Input, TemplateRef, ViewContainerRef, Directive, QueryList, ContentChildren} from "@angular/core";
 
 @Directive({
     selector: "[itemTemplate]"
@@ -11,6 +11,16 @@ export class ItemTemplate {
     constructor(public templateRef: TemplateRef<any>) {
     }
     
+}
+
+@Directive({
+    selector: "items"
+})
+export class Items {
+
+    @ContentChildren(ItemTemplate)
+    itemTemplates: QueryList<ItemTemplate>;
+
 }
 
 @Directive({

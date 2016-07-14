@@ -278,7 +278,7 @@ export class Sample1App {
     loader = (term: string) => {
         return this.http
             .get("https://api.github.com/search/repositories?q=" + term)
-            .map(res => res.json().items) as Observable<any>;
+            .map(res => res.json().itemTemplates) as Observable<any>;
     };
 
     itemConstructor = (term: string) => {

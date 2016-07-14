@@ -253,6 +253,30 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>model: </h4>
     <pre>{{ selectedCars19 | json }}</pre>
     
+    <h4>Select items with items inside template: </h4>
+    <select-items [(ngModel)]="selectedCars20">
+        <items>
+            <span *itemTemplate="'bmw'">BMW</span>
+            <span *itemTemplate="'mercedes'">Mercedes</span>
+            <span *itemTemplate="'porshe'">Porshe</span>
+        </items>
+    </select-items>
+    
+    <h4>model: </h4>
+    <pre>{{ selectedCars20 | json }}</pre>
+ 
+    <h4>Select items with items inside template, second example:</h4>
+    <select-items [(ngModel)]="selectedCars21">
+        <items>
+            <span *itemTemplate="carBmw">BMW</span>
+            <span *itemTemplate="{ type: 'mercedes', year: 2000 }">Mercedes</span>
+            <span *itemTemplate="{ type: 'porshe', year: 2009 }">Porshe</span>
+        </items>
+    </select-items>
+    
+    <h4>model: </h4>
+    <pre>{{ selectedCars21 | json }}</pre>
+     
     <!-- SAME WITH RADIO -->
     
     <hr>
@@ -449,6 +473,8 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
 })
 export class Sample1App {
 
+    carBmw = { type: "bmw", year: 2005 };
+
     cars: Car[] = [
         new Car(1, "BMW", 2000),
         new Car(2, "Mercedes", 1999),
@@ -479,6 +505,8 @@ export class Sample1App {
     selectedCars17: Car[] = [];
     selectedCars18: Car[] = [];
     selectedCars19: Car[] = [];
+    selectedCars20: Car[] = [];
+    selectedCars21: Car[] = [];
     secondSelectedCars: Car[] = [
         new Car(2, "Mercedes", 1999)
     ];
