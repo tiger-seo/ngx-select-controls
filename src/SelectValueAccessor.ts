@@ -117,7 +117,7 @@ export class SelectValueAccessor implements ControlValueAccessor {
     }
 
     has(value: any): boolean {
-        return !!this.get(value);
+        return this.get(value) !== undefined;
     }
 
     get(value: any): boolean {

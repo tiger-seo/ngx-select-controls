@@ -8,7 +8,7 @@ import {EventEmitter} from "@angular/platform-browser-dynamic/src/facade/async";
 <div (click)="check($event)" 
      [class.disabled]="isDisabled()"
      [class.readonly]="isReadonly()"
-     class="radio-item" >
+     class="radio-item">
     <input class="radio-item-input" type="radio" [checked]="isChecked()" [disabled]="isDisabled()"/> <ng-content></ng-content>
 </div>`,
     styles: [`

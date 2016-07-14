@@ -56,6 +56,7 @@ import {Car} from "./Car";
     
     <h4>Sort by: (check boxes in group, less flexible, but simpler and the whole component is clickable)</h4>
     <radio-group [(ngModel)]="sortBy">
+        <radio-item value="">No sorting</radio-item>
         <radio-item value="rating">Rating</radio-item>
         <radio-item value="date">Date</radio-item>
         <radio-item value="watches">Watch count</radio-item>
