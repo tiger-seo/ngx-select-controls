@@ -214,11 +214,11 @@ export class Sample1App {
         new Repository(2, "Typescript", { name: "Microsoft" }),
         new Repository(3, "React", { name: "Facebook" }),
     ];
-    newSelectedRepository: Repository = new Repository(1, "Angular", { name: "Google" });;
+    newSelectedRepository: Repository = new Repository(1, "Angular", { name: "Google" });
 
     selectedRepository1: Repository;
     selectedRepository2: Repository;
-    selectedRepository3: Repository = new Repository(1, "Angular", { name: "Google" });;
+    selectedRepository3: Repository = new Repository(1, "Angular", { name: "Google" });
     selectedRepository4: Repository;
     selectedRepository5: Repository;
     selectedRepository6: Repository;
@@ -234,7 +234,7 @@ export class Sample1App {
     loader = (term: string) => {
         return this.http
             .get("https://api.github.com/search/repositories?q=" + term)
-            .map(res => res.json().itemTemplates) as Observable<any>;
+            .map(res => res.json().items) as Observable<any>;
     };
 
     itemConstructor = (term: string) => {

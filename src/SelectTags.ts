@@ -93,9 +93,7 @@ export class SelectTagsBoxTemplate {
             {{ maxModelSizeLabel }}
         </div>
         <div class="select-tags-dropdown-menu dropdown-menu"
-            [class.hidden]="!dropdownSelectItems.getItems().length"
-             dropdown-not-closable-zone 
-             tabindex="1">
+            [class.hidden]="!dropdownSelectItems.getItems().length">
             <select-items #dropdownSelectItems
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"

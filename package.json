@@ -1,6 +1,6 @@
 {
   "name": "ng2-select-controls",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Advanced select, checkbox and radio controls.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -80,6 +80,6 @@
     "zone.js": "^0.6.12"
   },
   "dependencies": {
-    "ng2-dropdown": "^0.0.9"
+    "ng2-dropdown": "^0.0.10"
   }
 }

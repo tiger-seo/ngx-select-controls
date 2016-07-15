@@ -49,9 +49,7 @@ export class AutocompleteDropdownTemplate {
             </div>
         </div>
         <div class="autocomplete-dropdown-menu dropdown-menu"
-             [class.hidden]="!dropdownSelectItems.getItems().length"
-             dropdown-not-closable-zone 
-             tabindex="1">
+             [class.hidden]="!dropdownSelectItems.getItems().length">
             <select-items #dropdownSelectItems
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"
@@ -416,10 +414,12 @@ export class Autocomplete implements OnInit {
 
         // if persist mode is set then create a new object
         if (!this.isMultiple()) {
-            if (this.persist && term && (!this.valueAccessor.model || this.getItemLabel(this.valueAccessor.model) !== term)) {
-                const value = this.itemConstructor ? this.itemConstructor(term) : { [this.labelBy as string]: term };
-                this.valueAccessor.set(value);
+            if (term && (!this.valueAccessor.model || this.getItemLabel(this.valueAccessor.model) !== term)) {
                 this.originalModel = false;
+                if (this.persist) {
+                    const value = this.itemConstructor ? this.itemConstructor(term) : { [this.labelBy as string]: term };
+                    this.valueAccessor.set(value);
+                }
             }
 
             // if term is empty then clean the model
