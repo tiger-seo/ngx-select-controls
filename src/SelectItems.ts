@@ -68,6 +68,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                     <span class="remove-button" 
                           [class.hidden]="!removeButton" (click)="removeItem(item)">×</span>
                 </div>
+                <div [class.hidden]="!noItemsLabel || getItems().length > 0" class="no-items-label">{{ noItemsLabel }}</div>
             </div>
         </checkbox-group>
     </div>
@@ -104,6 +105,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                     </radio-item>
                     <span class="remove-button" [class.hidden]="!removeButton" (click)="removeItem(item)">×</span>
                 </div>
+                <div [class.hidden]="!noItemsLabel || getItems().length > 0" class="no-items-label">{{ noItemsLabel }}</div>
             </div>
         </radio-group>
     </div>
@@ -288,6 +290,9 @@ export class SelectItems implements AfterViewInit, OnInit {
 
     @Input()
     noSelectionLabel: string;
+
+    @Input()
+    noItemsLabel: string;
 
     @Input()
     maxModelSize: number;
