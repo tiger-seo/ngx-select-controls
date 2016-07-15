@@ -33,7 +33,7 @@ export class AutocompleteDropdownTemplate {
     selector: "autocomplete",
     template: `
 <div class="autocomplete">
-    <div class="autocomplete-dropdown dropdown" dropdown [dropdownToggle]="false">
+    <div class="autocomplete-dropdown dropdown" dropdown [dropdownToggle]="false" [dropdownFocusActivate]="true">
         <div class="autocomplete-input" [class.autocomplete-input-group]="isMultiple() && persist">
             <input dropdown-open
                    type="text"
@@ -49,7 +49,9 @@ export class AutocompleteDropdownTemplate {
             </div>
         </div>
         <div class="autocomplete-dropdown-menu dropdown-menu"
-             [class.hidden]="!dropdownSelectItems.getItems().length">
+             [class.hidden]="!dropdownSelectItems.getItems().length"
+             dropdown-not-closable-zone 
+             tabindex="1">
             <select-items #dropdownSelectItems
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"
@@ -361,6 +363,7 @@ export class Autocomplete implements OnInit {
 
     private originalModel = false;
     private initialized: boolean = false;
+    private itemsAreLoaded: boolean = false;
     private loadDebounce: Function;
 
     // -------------------------------------------------------------------------
@@ -448,12 +451,14 @@ export class Autocomplete implements OnInit {
             loaderResult.then(items => {
                 this.lastLoadTerm = this.term;
                 this.items = items;
+                this.itemsAreLoaded = true;
             });
 
         } else if (loaderResult instanceof Observable) {
             loaderResult.subscribe(items => {
                 this.lastLoadTerm = this.term;
                 this.items = items;
+                this.itemsAreLoaded = true;
             });
         }
     }
@@ -466,11 +471,13 @@ export class Autocomplete implements OnInit {
         if (!this.isMultiple() && model) {
             this.term = this.getItemLabel(model);
             this.lastLoadTerm = this.term;
-            this.items = [];
+            if (this.itemsAreLoaded)
+                this.items = [];
         } else {
             this.lastLoadTerm = "";
             this.term = "";
-            this.items = [];
+            if (this.itemsAreLoaded)
+                this.items = [];
         }
     }
 

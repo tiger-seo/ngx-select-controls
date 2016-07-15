@@ -47,7 +47,7 @@ export class SelectTagsBoxTemplate {
 <div class="select-tags"
      [class.disabled]="disabled"
      [class.readonly]="readonly">
-    <div class="select-tags-dropdown dropdown" dropdown [dropdownToggle]="false">
+    <div class="select-tags-dropdown dropdown" dropdown [dropdownToggle]="false" [dropdownFocusActivate]="true">
         <div #selectTagsBox
             (click)="focusTagsInput()" 
             (keydown)="onSelectTagsBoxKeydown($event)"
@@ -93,7 +93,9 @@ export class SelectTagsBoxTemplate {
             {{ maxModelSizeLabel }}
         </div>
         <div class="select-tags-dropdown-menu dropdown-menu"
-            [class.hidden]="!dropdownSelectItems.getItems().length">
+            [class.hidden]="!dropdownSelectItems.getItems().length"
+             dropdown-not-closable-zone 
+             tabindex="1">
             <select-items #dropdownSelectItems
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"

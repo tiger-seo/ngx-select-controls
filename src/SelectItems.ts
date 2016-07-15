@@ -260,6 +260,9 @@ export class SelectItems implements AfterViewInit, OnInit {
     hideSelected: boolean = false;
 
     @Input()
+    hideNonSelected: boolean = false;
+
+    @Input()
     removeButton: boolean = false;
 
     @Input()
@@ -544,6 +547,10 @@ export class SelectItems implements AfterViewInit, OnInit {
 
         if (this.hideSelected) {
             items = items.filter(item => !this.valueAccessor.has(item));
+        }
+
+        if (this.hideNonSelected) {
+            items = items.filter(item => this.valueAccessor.has(item));
         }
 
         this.isMaxLimitReached = false;
