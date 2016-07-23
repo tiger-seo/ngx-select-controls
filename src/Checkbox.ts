@@ -5,7 +5,7 @@ import {SelectValidator} from "./SelectValidator";
 import {CheckboxGroup} from "./CheckboxGroup";
 
 @Directive({
-    selector: "input[type=checkbox]",
+    selector: "input[type=checkbox][ngModel]",
     providers: [
         SelectValueAccessor,
         SelectValidator,

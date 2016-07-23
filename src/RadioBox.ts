@@ -15,7 +15,7 @@ import {SelectValidator} from "./SelectValidator";
 import {RadioGroup} from "./RadioGroup";
 
 @Directive({
-    selector: "input[type=radio]",
+    selector: "input[type=radio][ngModel]",
     providers: [
         SelectValueAccessor,
         SelectValidator,
