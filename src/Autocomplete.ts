@@ -34,7 +34,7 @@ export class AutocompleteDropdownTemplate {
     template: `
 <div class="autocomplete">
     <div class="autocomplete-dropdown dropdown" dropdown [dropdownToggle]="false" [dropdownFocusActivate]="true">
-        <div class="autocomplete-input" [class.autocomplete-input-group]="isMultiple() && persist">
+        <div class="autocomplete-input" [class.autocomplete-input-group]="valueAccessor.multiple && persist">
             <input dropdown-open
                    type="text"
                    [placeholder]="placeholder"
@@ -44,7 +44,7 @@ export class AutocompleteDropdownTemplate {
                    (focus)="load()"
                    (click)="load()"
                    (keydown.enter)="addTerm()"/>
-            <div class="autocomplete-add-button" [class.hidden]="!isMultiple() || !persist || !term || !term.length">
+            <div class="autocomplete-add-button" [class.hidden]="!valueAccessor.multiple || !persist || !term || !term.length">
                 <a (click)="addTerm()">{{ addButtonLabel }}</a> {{ addButtonSecondaryLabel }}
             </div>
         </div>
@@ -58,7 +58,7 @@ export class AutocompleteDropdownTemplate {
                 [items]="items"
                 [hideSelected]="true"
                 [hideControls]="true"
-                [multiple]="isMultiple()"
+                [multiple]="valueAccessor.multiple"
                 [disabled]="disabled"
                 [labelBy]="labelBy"
                 [trackBy]="trackBy"
@@ -194,7 +194,9 @@ export class Autocomplete implements OnInit {
      * This option explicitly set multiple mode, so its ignore whenever your ngModel is an array or not.
      */
     @Input()
-    multiple: boolean;
+    set multiple(multiple: boolean) {
+        this.valueAccessor.multiple = multiple;
+    }
 
     /**
      * By default autocomplete can't create a new items into your model. It can only select exist items from the
@@ -416,7 +418,7 @@ export class Autocomplete implements OnInit {
     onTermChange(term: string) {
 
         // if persist mode is set then create a new object
-        if (!this.isMultiple()) {
+        if (!this.valueAccessor.multiple) {
             if (term && (!this.valueAccessor.model || this.getItemLabel(this.valueAccessor.model) !== term)) {
                 this.originalModel = false;
                 if (this.persist) {
@@ -468,7 +470,7 @@ export class Autocomplete implements OnInit {
      */
     onModelChange(model: any) {
         this.valueAccessor.set(model);
-        if (!this.isMultiple() && model) {
+        if (!this.valueAccessor.multiple && model) {
             this.term = this.getItemLabel(model);
             this.lastLoadTerm = this.term;
             if (this.itemsAreLoaded)
@@ -485,7 +487,7 @@ export class Autocomplete implements OnInit {
      * Adds a new item based on the inputted term.
      */
     addTerm() {
-        if (!this.term || !this.persist || !this.isMultiple()) return;
+        if (!this.term || !this.persist || !this.valueAccessor.multiple) return;
 
         const newModel = this.itemConstructor ? this.itemConstructor(this.term) : { [this.labelBy as string]: this.term };
         this.valueAccessor.add(newModel);
@@ -495,21 +497,11 @@ export class Autocomplete implements OnInit {
     }
 
     /**
-     * Checks if component is in multiple mode.
-     */
-    isMultiple() {
-        if (this.multiple !== undefined)
-            return this.multiple;
-
-        return this.valueAccessor.model instanceof Array;
-    }
-
-    /**
      * Checks if component should be disabled or not.
      */
     isDisabled() {
         if (this.maxModelSize > 0 &&
-            this.isMultiple() &&
+            this.valueAccessor.multiple &&
             this.valueAccessor.model.length >= this.maxModelSize)
             return true;
 

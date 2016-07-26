@@ -1,4 +1,4 @@
-import {Component, Input, Host, forwardRef, Inject, ViewEncapsulation, Output} from "@angular/core";
+import {Component, Input, Host, forwardRef, Inject, ViewEncapsulation, Output, ContentChildren} from "@angular/core";
 import {RadioGroup} from "./RadioGroup";
 import {EventEmitter} from "@angular/platform-browser-dynamic/src/facade/async";
 
@@ -55,7 +55,22 @@ export class RadioItem {
 
     check(event: MouseEvent) {
         if (this.isReadonly() || this.isDisabled()) return;
-        this.radioGroup.valueAccessor.set(this.value);
+
+        // remove all other radio items
+        this.radioGroup.radioItems.forEach(radioItem => {
+            if (this.radioGroup.valueAccessor.has(radioItem.value)) {
+                this.radioGroup.valueAccessor.remove(radioItem.value);
+            }
+        });
+
+        // add selected value
+        if (this.radioGroup.valueAccessor.model instanceof Array) {
+            this.radioGroup.valueAccessor.add(this.value);
+        } else {
+            this.radioGroup.valueAccessor.set(this.value);
+        }
+
+        // emitting event
         this.onSelect.emit({ event: event });
     }
 

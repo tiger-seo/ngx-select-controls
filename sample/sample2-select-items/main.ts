@@ -14,6 +14,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Simple select items: </h4>
     <select-items [(ngModel)]="selectedCars"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name">
     </select-items>
     
@@ -23,6 +24,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select list with search</h4>
     <select-items [(ngModel)]="selectedCars1"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   searchBy="name"
                   searchLabel="search...">
@@ -33,6 +35,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select list with ordering</h4>
     <select-items [(ngModel)]="selectedCars2"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   orderBy="name">
     </select-items>
@@ -42,6 +45,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select list with descendant ordering</h4>
     <select-items [(ngModel)]="selectedCars3"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   orderBy="name"
                   orderDirection="desc">
@@ -53,6 +57,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with select all option</h4>
     <select-items [(ngModel)]="selectedCars4"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   [selectAll]="true"
                   selectAllLabel="select all"> <!-- label is optional -->
@@ -63,6 +68,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with limited number of shown items:</h4>
     <select-items [(ngModel)]="selectedCars5"
                   [items]="cars"
+                  [multiple]="true"
                   [limit]="4"
                   labelBy="name">
     </select-items>
@@ -72,6 +78,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with limited number of shown items, with more button:</h4>
     <select-items [(ngModel)]="selectedCars6"
                   [items]="cars"
+                  [multiple]="true"
                   [limit]="4"
                   labelBy="name"
                   moreLabel="more">
@@ -82,6 +89,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with limited number of shown items, with more & hide button:</h4>
     <select-items [(ngModel)]="selectedCars7"
                   [items]="cars"
+                  [multiple]="true"
                   [limit]="4"
                   labelBy="name"
                   moreLabel="more"
@@ -93,6 +101,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items where items can be removed:</h4>
     <select-items [(ngModel)]="selectedCars8"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   [removeButton]="true">
     </select-items>
@@ -102,6 +111,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with no controls:</h4>
     <select-items [(ngModel)]="selectedCars9"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   [hideControls]="true">
     </select-items>
@@ -111,6 +121,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items where where selected items are not showing after they are selected:</h4>
     <select-items [(ngModel)]="selectedCars10"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   [hideSelected]="true">
     </select-items>
@@ -120,6 +131,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with maximal number of allowed selected items:</h4>
     <select-items [(ngModel)]="selectedCars11"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   [maxModelSize]="3">
     </select-items>
@@ -129,6 +141,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with minimal number of allowed selected items:</h4>
     <select-items [(ngModel)]="selectedCars12"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   [minModelSize]="3">
     </select-items>
@@ -138,6 +151,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with track by, to track by another model:</h4>
     <select-items [(ngModel)]="secondSelectedCars"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   trackBy="name">
     </select-items>
@@ -147,6 +161,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with value by, to get more specific values:</h4>
     <select-items [(ngModel)]="selectedCarNames"
                   [items]="cars"
+                  [multiple]="true"
                   labelBy="name"
                   valueBy="name">
     </select-items>
@@ -156,6 +171,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with grouping:</h4>
     <select-items [(ngModel)]="selectedCars13"
                   [items]="cars"
+                  [multiple]="true"
                   groupBy="year"
                   labelBy="name"
                   valueBy="name">
@@ -166,6 +182,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with grouping and select-alls in groups:</h4>
     <select-items [(ngModel)]="selectedCars14"
                   [items]="cars"
+                  [multiple]="true"
                   [groupSelectAll]="true"
                   groupBy="year"
                   labelBy="name"
@@ -177,6 +194,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with grouping and select-alls in groups, but without a checkbox:</h4>
     <select-items [(ngModel)]="selectedCars15"
                   [items]="cars"
+                  [multiple]="true"
                   [groupSelectAll]="true"
                   [hideGroupSelectAllCheckbox]="true"
                   groupBy="year"
@@ -189,6 +207,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with custom item template:</h4>
     <select-items #selectItems
                   [(ngModel)]="selectedCars17"
+                  [multiple]="true"
                   [items]="cars"
                   labelBy="name">
         <span *ngFor="let item of selectItems.displayedItems">
@@ -203,6 +222,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>Select items with custom item template and hidden controls:</h4>
     <select-items #secondSelectItems
                   [(ngModel)]="selectedCars17"
+                  [multiple]="true"
                   [items]="cars"
                   [hideControls]="true"
                   labelBy="name">
@@ -217,6 +237,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     
     <h4>All-in-one select items:</h4>
     <select-items [(ngModel)]="selectedCars18"
+                  [multiple]="true"
                   [items]="cars"
                   [removeButton]="true"
                   [hideControls]="false"
@@ -241,6 +262,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
         <select-items  #selectedCarsInput="ngModel"
                       name="selectedCars"
                       [(ngModel)]="selectedCars19"
+                      [multiple]="true"
                       [items]="cars"
                       [required]="true"
                       labelBy="name">
@@ -254,7 +276,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <pre>{{ selectedCars19 | json }}</pre>
     
     <h4>Select items with items inside template: </h4>
-    <select-items [(ngModel)]="selectedCars20">
+    <select-items [(ngModel)]="selectedCars20" [multiple]="true">
         <items>
             <span *itemTemplate="'bmw'">BMW</span>
             <span *itemTemplate="'mercedes'">Mercedes</span>
@@ -266,7 +288,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <pre>{{ selectedCars20 | json }}</pre>
  
     <h4>Select items with items inside template, second example:</h4>
-    <select-items [(ngModel)]="selectedCars21">
+    <select-items [(ngModel)]="selectedCars21" [multiple]="true">
         <items>
             <span *itemTemplate="carBmw">BMW</span>
             <span *itemTemplate="{ type: 'mercedes', year: 2000 }">Mercedes</span>
@@ -466,6 +488,23 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     <h4>model: </h4>
     <pre>{{ selectedCar | json }}</pre>
     
+    <hr/>
+    
+    <h4>Single select, but array model:</h4>
+    <select-items [(ngModel)]="selectedCars22"
+                  [multiple]="false"
+                  [items]="cars"
+                  labelBy="name"
+                  trackBy="id">
+    </select-items>
+    <br/><br/>
+    <select-items [(ngModel)]="selectedCars22"
+                  [multiple]="false"
+                  [items]="cars2"
+                  labelBy="name"
+                  trackBy="id">
+    </select-items>
+    <h4>model: selectedCars22</h4>
     
 </div>
 `,
@@ -483,6 +522,13 @@ export class Sample1App {
         new Car(5, "Ferrari", 2000),
         new Car(6, "Toyota", 2008),
         new Car(7, "Nissan", 1940)
+    ];
+    cars2: Car[] = [
+        new Car(11, "Ford", 2000),
+        new Car(12, "Nexia", 1999),
+        new Car(13, "Lada", 2008),
+        new Car(14, "Range Rover", 1940),
+        new Car(15, "Mitsubishi", 2000),
     ];
 
     selectedCars: Car[] = [];
@@ -510,6 +556,7 @@ export class Sample1App {
     secondSelectedCars: Car[] = [
         new Car(2, "Mercedes", 1999)
     ];
+    selectedCars22: Car[] = [];
     selectedCarNames: string[] = [];
 
     selectedCar: Car;

@@ -28,7 +28,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
     <div [class.hidden]="!searchBy">
         <input class="select-items-search" type="text" [(ngModel)]="keyword" [placeholder]="searchLabel">
     </div>
-    <div class="select-items-multiple" *ngIf="isMultiple()">
+    <div class="select-items-multiple" *ngIf="valueAccessor.multiple">
         <div class="select-items-item select-all" 
             (click)="selectAllItems(getItems())" 
             [ngStyle]="{ display: ((searchBy && keyword) || !selectAll || !getItems().length) ? 'none' : 'block' }"
@@ -72,7 +72,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
             </div>
         </checkbox-group>
     </div>
-    <div class="select-items-single" *ngIf="!isMultiple()">
+    <div class="select-items-single" *ngIf="!valueAccessor.multiple">
         <div class="select-items-item no-selection" 
             [class.hide-controls]="hideControls"
             [class.hidden]="!noSelection"
@@ -223,7 +223,9 @@ export class SelectItems implements AfterViewInit, OnInit {
     itemsChange = new EventEmitter();
 
     @Input()
-    multiple: boolean;
+    set multiple(multiple: boolean) {
+        this.valueAccessor.multiple = multiple;
+    }
 
     @Input()
     disableBy: string|((item: any) => string);
@@ -414,13 +416,6 @@ export class SelectItems implements AfterViewInit, OnInit {
         this.checkActive();
     }
 
-    isMultiple() {
-        if (this.multiple === undefined)
-            return this.valueAccessor.model instanceof Array;
-
-        return this.multiple;
-    }
-
     isItemDisabled(item: any) {
         if (this.disabled)
             return true;
@@ -434,11 +429,11 @@ export class SelectItems implements AfterViewInit, OnInit {
             }
         }
 
-        if (this.isMultiple()) {
-            if (this.maxModelSize > 0 && this.valueAccessor.model.length >= this.maxModelSize) {
+        if (this.valueAccessor.multiple) {
+            if (this.maxModelSize > 0 && this.valueAccessor.model && this.valueAccessor.model.length >= this.maxModelSize) {
                 return this.valueAccessor.has(item) ? false : true;
             }
-            if (this.minModelSize > 0 && this.valueAccessor.model.length <= this.minModelSize) {
+            if (this.minModelSize > 0 && this.valueAccessor.model && this.valueAccessor.model.length <= this.minModelSize) {
                 return this.valueAccessor.has(item) ? true : false;
             }
 
@@ -623,10 +618,10 @@ export class SelectItems implements AfterViewInit, OnInit {
         const items = this.getItems();
         let newIndex = this.active - 1;
         if (newIndex === -1) {
-            if (this.isMultiple() && this.selectAllLabel) {
+            if (this.valueAccessor.multiple && this.selectAllLabel) {
                 this.activeSelectAll = true;
                 this.active = -1;
-            } else if (!this.isMultiple() && this.noSelectionLabel) {
+            } else if (!this.valueAccessor.multiple && this.noSelectionLabel) {
                 this.activeNoSelection = true;
                 this.active = -1;
             } else {
@@ -669,7 +664,7 @@ export class SelectItems implements AfterViewInit, OnInit {
             this.resetModel();
 
         } else if (this.active > -1 && items[this.active]) {
-            if (this.isMultiple()) {
+            if (this.valueAccessor.multiple) {
                 this.valueAccessor.addOrRemove(items[this.active]);
             } else {
                 this.valueAccessor.set(items[this.active]);

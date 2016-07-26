@@ -179,6 +179,7 @@ export class SelectTagsBoxTemplate {
 }
 .select-tags .select-tags-dropdown.open .dropdown-menu {
     display: block;
+    outline: none;
 }
 .select-tags .select-tags-box {
     padding: 5px 5px 3px 5px;

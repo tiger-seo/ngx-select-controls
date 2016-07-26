@@ -13,6 +13,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown multiple:</h4>
         <select-dropdown [(ngModel)]="selectedCars1" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"></select-dropdown>
@@ -41,6 +42,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown multiple with custom label:</h4>
         <select-dropdown [(ngModel)]="selectedCars2" 
+                    [multiple]="true"
                     [items]="cars"
                     label="click here to select"
                     labelBy="name"
@@ -61,6 +63,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown multiple with select all option:</h4>
         <select-dropdown [(ngModel)]="selectedCars3" 
+                    [multiple]="true"
                     [items]="cars"
                     [selectAll]="true"
                     labelBy="name"
@@ -71,6 +74,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown multiple with limit:</h4>
         <select-dropdown [(ngModel)]="selectedCars4" 
+                    [multiple]="true"
                     [items]="cars"
                     [limit]="3"
                     labelBy="name"
@@ -81,6 +85,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown disabled:</h4>
         <select-dropdown [(ngModel)]="selectedCars5" 
+                    [multiple]="true"
                     [items]="cars"
                     [disabled]="true"
                     labelBy="name"
@@ -91,6 +96,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown ordered:</h4>
         <select-dropdown [(ngModel)]="selectedCars6" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -101,6 +107,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown ordered desc:</h4>
         <select-dropdown [(ngModel)]="selectedCars7" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -112,6 +119,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown specific values:</h4>
         <select-dropdown [(ngModel)]="selectedCars8" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     valueBy="name"></select-dropdown>
@@ -121,6 +129,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown with search:</h4>
         <select-dropdown [(ngModel)]="selectedCars9" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -132,6 +141,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown single with search:</h4>
         <select-dropdown [(ngModel)]="selectedCar3" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -143,6 +153,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown with hidden controls:</h4>
         <select-dropdown [(ngModel)]="selectedCars10" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -153,6 +164,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown multiple readonly:</h4>
         <select-dropdown [(ngModel)]="selectedCars10" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -163,6 +175,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
     
         <h4>Select Dropdown multiple readonly and readonly custom label:</h4>
         <select-dropdown [(ngModel)]="selectedCars11" 
+                    [multiple]="true"
                     [items]="cars"
                     labelBy="name"
                     trackBy="name"
@@ -187,6 +200,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
             <select-dropdown #selectedCarInput="ngModel"
                         name="selectedCar"
                         [(ngModel)]="selectedCars12" 
+                        [multiple]="true"
                         [items]="cars"
                         labelBy="name"
                         trackBy="name"
@@ -212,7 +226,8 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
         
         <div *ngFor="let item of [1, 2, 3, 4, 5]; let index = index">
             <h4>Select Dropdown {{ index }}:</h4>
-            <select-dropdown [(ngModel)]="selectedCarsInLoop" 
+            <select-dropdown [(ngModel)]="selectedCarsInLoop[index]" 
+                        [multiple]="true"
                         [items]="cars"
                         labelBy="name"
                         trackBy="name"></select-dropdown>
@@ -220,6 +235,17 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
             <br/><b>model: </b>
             <pre>{{ selectedCarsInLoop[index] | json }}</pre>
         </div>
+        
+        <h4>Select Dropdown readonly with custom readonly label:</h4>
+        <select-dropdown [(ngModel)]="notSelectedCar" 
+                    [items]="cars"
+                    labelBy="name"
+                    trackBy="name"
+                    [readonly]="true"
+                    readonlyLabel="car is not selected yet"></select-dropdown>
+
+        <br/><b>model: </b>
+        <pre>{{ notSelectedCar | json }}</pre>
     
 </div>
 `,

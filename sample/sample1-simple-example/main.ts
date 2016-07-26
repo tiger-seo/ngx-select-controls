@@ -128,6 +128,26 @@ import {Car} from "./Car";
     <b>selectedCars:</b>
     <pre>{{ selectedCars2 | json }}</pre>
     
+    
+    
+    <h4>Radio group with array model:</h4>
+    <h5>first: </h5>
+    <radio-group [(ngModel)]="selectedOrders">
+        <radio-item value="rating">Rating</radio-item>
+        <radio-item value="date">Date</radio-item>
+        <radio-item value="watches">Watch count</radio-item>
+        <radio-item value="comments">Comment count</radio-item>
+    </radio-group>
+    <h5>second: </h5>
+    <radio-group [(ngModel)]="selectedOrders">
+        <radio-item value="with_comments">with comments</radio-item>
+        <radio-item value="without_comments">without comments</radio-item>
+    </radio-group>
+    
+    <i>selected orders:</i> <b>{{ selectedOrders }}</b><br/><br/>
+
+
+    
 </div>
 `,
     directives: [SELECT_CONTROL_DIRECTIVES]
@@ -137,6 +157,7 @@ export class Sample1App {
     isSomethingEnabled: boolean = false;
     sortBy: string = "date";
     orderBy: string[] = ["rating", "comments"];
+    selectedOrders: string[] = [];
 
     selectedCars1: Car[] = [];
     selectedCars2: Car[] = [];

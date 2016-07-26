@@ -8,6 +8,7 @@ export class SelectValueAccessor implements ControlValueAccessor {
     // Public Properties
     // -------------------------------------------------------------------------
 
+    multiple: boolean = false;
     modelWrites = new EventEmitter<any>();
     trackBy: string|((item1: any, item2: any) => boolean);
     valueBy: string|((item: any) => string);
@@ -67,6 +68,7 @@ export class SelectValueAccessor implements ControlValueAccessor {
 
     remove(value: any) {
         // value = this.extractModelValue(value);
+        if (!(this._model instanceof Array)) return;
         if (this.trackBy) {
             const item = this._model.find((i: any) => {
                 if (this.trackBy instanceof Function) {

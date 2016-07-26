@@ -13,7 +13,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
     <div class="select-dropdown-dropdown dropdown" dropdown>
         <div class="select-dropdown-box" tabindex="1"
      (keydown)="onSelectTagsBoxKeydown($event)" dropdown-open>
-            <div *ngIf="isMultiple()">
+            <div *ngIf="valueAccessor.multiple">
                 <span [class.hidden]="listSelectItems.getItems().length > 0">
                     <span class="no-selection" [class.readonly]="readonly" [class.disabled]="disabled">{{ readonly ? (readonlyLabel || label) : label }}</span>
                 </span>
@@ -26,7 +26,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                       [required]="required"
                       [readonly]="true"></select-items>
             </div>
-            <div *ngIf="!isMultiple()">
+            <div *ngIf="!valueAccessor.multiple">
                 <span [class.hidden]="valueAccessor.model">
                     <span class="no-selection" [class.readonly]="readonly" [class.disabled]="disabled">{{ readonly ? (readonlyLabel || label) : label }}</span>
                 </span>
@@ -44,7 +44,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                     [(ngModel)]="valueAccessor.model" 
                     (ngModelChange)="onModelChange($event)" 
                     [items]="items"
-                    [multiple]="isMultiple()"
+                    [multiple]="valueAccessor.multiple"
                     [limit]="limit"
                     [disabled]="disabled"
                     [labelBy]="labelBy"
@@ -104,6 +104,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
 }
 .select-dropdown .dropdown.open .dropdown-menu {
     display: block;
+    outline: none;
 }
 .select-dropdown .select-dropdown-box .single-selected, 
 .select-dropdown .select-dropdown-box .select-items .select-items-item .select-items-label, 
@@ -202,9 +203,6 @@ export class SelectDropdown {
     readonlyLabel: string;
 
     @Input()
-    multiple: boolean;
-
-    @Input()
     listTrackBy: string|((item: any) => string);
 
     @Input()
@@ -263,6 +261,11 @@ export class SelectDropdown {
     // -------------------------------------------------------------------------
 
     @Input()
+    set multiple(multiple: boolean) {
+        this.valueAccessor.multiple = multiple;
+    }
+
+    @Input()
     set valueBy(valueBy: string|((item: any) => string)) {
         this.valueAccessor.valueBy = valueBy;
     }
@@ -312,13 +315,6 @@ export class SelectDropdown {
     // Public Methods
     // -------------------------------------------------------------------------
 
-    isMultiple() {
-        if (this.multiple !== undefined)
-            return this.multiple;
-
-        return this.valueAccessor.model instanceof Array;
-    }
-    
     getItemLabel(item: any) {// todo: duplication
         if (!item) return "";
         const labelBy = this.valueBy ? this.listLabelBy : (this.listLabelBy || this.labelBy);
@@ -337,7 +333,7 @@ export class SelectDropdown {
 
     onModelChange(model: any) {
         this.valueAccessor.set(model);
-        if (!this.isMultiple()) {
+        if (!this.valueAccessor.multiple) {
             this.dropdown.close();
         }
     }

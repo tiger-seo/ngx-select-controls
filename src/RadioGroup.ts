@@ -1,7 +1,8 @@
-import {Component, Input, Provider, ViewEncapsulation} from "@angular/core";
+import {Component, Input, Provider, ViewEncapsulation, forwardRef, ContentChildren} from "@angular/core";
 import {NG_VALUE_ACCESSOR, NG_VALIDATORS} from "@angular/forms";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectValidator} from "./SelectValidator";
+import {RadioItem} from "./RadioItem";
 
 @Component({
     selector: "radio-group",
@@ -47,6 +48,13 @@ export class RadioGroup {
     get required() {
         return this.validator.options.required;
     }
+
+    // -------------------------------------------------------------------------
+    // Public Properties
+    // -------------------------------------------------------------------------
+
+    @ContentChildren(forwardRef(() => RadioItem))
+    radioItems: RadioItem[];
 
     // -------------------------------------------------------------------------
     // Constructor
