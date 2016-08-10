@@ -1,6 +1,6 @@
 {
   "name": "ng2-select-controls",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Advanced select, checkbox and radio controls.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -46,18 +46,19 @@
   ],
   "peerDependencies": {
     "@angular/core": "^2.0.0-rc.1",
-    "@angular/forms": "^0.2.0"
+    "@angular/forms": "^0.3.0"
   },
   "devDependencies": {
-    "@angular/common": "^2.0.0-rc.4",
-    "@angular/compiler": "^2.0.0-rc.4",
-    "@angular/core": "2.0.0-rc.4",
-    "@angular/forms": "^0.2.0",
-    "@angular/http": "^2.0.0-rc.4",
-    "@angular/platform-browser": "^2.0.0-rc.4",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.4",
+    "@angular/common": "^2.0.0-rc.5",
+    "@angular/compiler": "^2.0.0-rc.5",
+    "@angular/core": "2.0.0-rc.5",
+    "@angular/forms": "^0.3.0",
+    "@angular/http": "^2.0.0-rc.5",
+    "@angular/platform-browser": "^2.0.0-rc.5",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.5",
     "bootstrap": "^3.3.6",
     "chai": "^3.4.1",
+    "core-js": "^2.4.0",
     "del": "^2.2.0",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",

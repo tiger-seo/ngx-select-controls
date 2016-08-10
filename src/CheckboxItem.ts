@@ -45,7 +45,7 @@ export class CheckboxItem {
     // Constructor
     // -------------------------------------------------------------------------
 
-    constructor(@Host() @Inject(forwardRef(() => CheckboxGroup))  private checkboxGroup: CheckboxGroup) {
+    constructor(@Host() @Inject(forwardRef(() => CheckboxGroup)) public checkboxGroup: CheckboxGroup) {
     }
 
     // -------------------------------------------------------------------------

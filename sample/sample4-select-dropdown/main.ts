@@ -1,10 +1,11 @@
 import "rxjs/Rx";
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {Component} from "@angular/core";
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {Component, NgModule} from "@angular/core";
 import {SELECT_CONTROL_DIRECTIVES} from "../../src/index";
+import {HttpModule} from "@angular/http";
+import {FormsModule} from "@angular/forms";
+import {BrowserModule} from "@angular/platform-browser";
 import {Car} from "./Car";
-import {HTTP_PROVIDERS, Http} from "@angular/http";
-import {disableDeprecatedForms, provideForms} from "@angular/forms";
 
 @Component({
     selector: "app",
@@ -251,7 +252,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
 `,
     directives: [SELECT_CONTROL_DIRECTIVES]
 })
-export class Sample1App {
+export class Sample4App {
 
     cars: Car[] = [
         new Car(1, "BMW", 2000),
@@ -280,8 +281,21 @@ export class Sample1App {
 
 }
 
-bootstrap(Sample1App, [
-    HTTP_PROVIDERS,
-    disableDeprecatedForms(),
-    provideForms(),
-]);
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule
+    ],
+    declarations: [
+        Sample4App
+    ],
+    bootstrap: [
+        Sample4App
+    ]
+})
+export class Sample4Module {
+
+}
+
+platformBrowserDynamic().bootstrapModule(Sample4Module);

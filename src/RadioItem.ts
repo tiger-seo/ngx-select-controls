@@ -1,6 +1,5 @@
-import {Component, Input, Host, forwardRef, Inject, ViewEncapsulation, Output, ContentChildren} from "@angular/core";
+import {Component, Input, Host, forwardRef, Inject, ViewEncapsulation, Output, EventEmitter} from "@angular/core";
 import {RadioGroup} from "./RadioGroup";
-import {EventEmitter} from "@angular/platform-browser-dynamic/src/facade/async";
 
 @Component({
     selector: "radio-item",

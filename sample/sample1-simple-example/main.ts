@@ -1,8 +1,9 @@
 import "rxjs/Rx";
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {Component} from "@angular/core";
-import {disableDeprecatedForms, provideForms } from "@angular/forms";
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {Component, NgModule} from "@angular/core";
 import {SELECT_CONTROL_DIRECTIVES} from "../../src/index";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule }   from "@angular/forms";
 import {Car} from "./Car";
 
 @Component({
@@ -54,7 +55,7 @@ import {Car} from "./Car";
     <i>selected items:</i> <b><span *ngFor="let order of orderBy">{{ order }} </span></b><br/><br/>
     
     
-    <h4>Sort by: (check boxes in group, less flexible, but simpler and the whole component is clickable)</h4>
+    <h4>Sort by: (radio boxes in group, less flexible, but simpler and the whole component is clickable)</h4>
     <radio-group [(ngModel)]="sortBy">
         <radio-item value="">No sorting</radio-item>
         <radio-item value="rating">Rating</radio-item>
@@ -66,7 +67,7 @@ import {Car} from "./Car";
     <i>selected item:</i> <b>{{ sortBy }}</b><br/><br/>
 
 
-    <h4>Order by: (radio boxes in group, less flexible, but simpler and the whole component is clickable)</h4>
+    <h4>Order by: (check boxes in group, less flexible, but simpler and the whole component is clickable)</h4>
     <checkbox-group [(ngModel)]="orderBy">
         <checkbox-item value="rating">Rating</checkbox-item>
         <checkbox-item value="date">Date</checkbox-item>
@@ -176,7 +177,20 @@ export class Sample1App {
 
 }
 
-bootstrap(Sample1App, [
-    disableDeprecatedForms(),
-    provideForms(),
-]);
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
+    declarations: [
+        Sample1App
+    ],
+    bootstrap: [
+        Sample1App
+    ]
+})
+export class Sample1Module {
+
+}
+
+platformBrowserDynamic().bootstrapModule(Sample1Module);

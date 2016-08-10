@@ -42,6 +42,10 @@ export class SelectValueAccessor implements ControlValueAccessor {
     // Accessors
     // -------------------------------------------------------------------------
 
+    get isEnabled() {
+        return !!this.onChange;
+    }
+
     get model() {
         return this._model;
     }

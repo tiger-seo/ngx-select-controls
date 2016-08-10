@@ -1,10 +1,10 @@
 import "rxjs/Rx";
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {Component} from "@angular/core";
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {FormsModule} from "@angular/forms";
+import {Component, NgModule} from "@angular/core";
 import {SELECT_CONTROL_DIRECTIVES} from "../../src/index";
+import {BrowserModule} from "@angular/platform-browser";
 import {Car} from "./Car";
-import {ItemTemplate} from "../../src/ItemTemplate";
-import {provideForms, disableDeprecatedForms} from "@angular/forms";
 
 @Component({
     selector: "app",
@@ -510,7 +510,7 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
 `,
     directives: [SELECT_CONTROL_DIRECTIVES]
 })
-export class Sample1App {
+export class Sample2App {
 
     carBmw = { type: "bmw", year: 2005 };
 
@@ -568,7 +568,20 @@ export class Sample1App {
 
 }
 
-bootstrap(Sample1App, [
-    disableDeprecatedForms(),
-    provideForms(),
-]);
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
+    declarations: [
+        Sample2App
+    ],
+    bootstrap: [
+        Sample2App
+    ]
+})
+export class Sample2Module {
+
+}
+
+platformBrowserDynamic().bootstrapModule(Sample2Module);

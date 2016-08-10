@@ -1,4 +1,4 @@
-import {Component, Input, Provider, ViewEncapsulation, ViewChild, Optional} from "@angular/core";
+import {Component, Input, ViewEncapsulation, ViewChild, Optional} from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectItems} from "./SelectItems";
 import {DROPDOWN_DIRECTIVES, Dropdown} from "ng2-dropdown";

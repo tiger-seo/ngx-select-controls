@@ -1,11 +1,12 @@
 import "rxjs/Rx";
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {Component} from "@angular/core";
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {Component, NgModule} from "@angular/core";
 import {SELECT_CONTROL_DIRECTIVES} from "../../src/index";
 import {Repository} from "./Repository";
-import {HTTP_PROVIDERS, Http} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {disableDeprecatedForms, provideForms} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
+import {BrowserModule} from "@angular/platform-browser";
 
 @Component({
     selector: "app",
@@ -216,7 +217,7 @@ import {disableDeprecatedForms, provideForms} from "@angular/forms";
 `,
     directives: [SELECT_CONTROL_DIRECTIVES]
 })
-export class Sample1App {
+export class Sample3App {
 
     repositories: Repository[] = [
         new Repository(1, "Angular", { name: "Google" }),
@@ -260,8 +261,21 @@ export class Sample1App {
 
 }
 
-bootstrap(Sample1App, [
-    HTTP_PROVIDERS,
-    disableDeprecatedForms(),
-    provideForms(),
-]);
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule
+    ],
+    declarations: [
+        Sample3App
+    ],
+    bootstrap: [
+        Sample3App
+    ]
+})
+export class Sample3Module {
+
+}
+
+platformBrowserDynamic().bootstrapModule(Sample3Module);

@@ -1,11 +1,12 @@
-import {Input, Host, Directive, HostBinding, Optional, HostListener, Provider, forwardRef, Inject} from "@angular/core";
+import {Input, Host, Directive, HostBinding, Optional, HostListener, forwardRef, Inject} from "@angular/core";
 import {NG_VALUE_ACCESSOR, NG_VALIDATORS} from "@angular/forms";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectValidator} from "./SelectValidator";
 import {CheckboxGroup} from "./CheckboxGroup";
+import {CheckboxItem} from "./CheckboxItem";
 
 @Directive({
-    selector: "input[type=checkbox][ngModel]",
+    selector: "checkbox-group input[type=checkbox], input[type=checkbox][ngModel]",
     providers: [
         SelectValueAccessor,
         SelectValidator,
@@ -43,6 +44,7 @@ export class Checkbox {
     // -------------------------------------------------------------------------
 
     constructor(@Optional() @Host() @Inject(forwardRef(() => CheckboxGroup)) private checkboxGroup: CheckboxGroup,
+                @Optional() @Host() @Inject(forwardRef(() => CheckboxItem)) private checkboxItem: CheckboxItem,
                 private validator: SelectValidator,
                 private valueAccessor: SelectValueAccessor) {
     }
@@ -53,12 +55,16 @@ export class Checkbox {
 
     @HostBinding("checked")
     get checked() {
+        if (this.checkboxItem) return this.checkboxItem.isChecked();
+
         const valueAccessor = this.checkboxGroup ? this.checkboxGroup.valueAccessor : this.valueAccessor;
         return valueAccessor.has(this.value);
     }
 
     @HostListener("click")
     check() {
+        if (this.checkboxItem) return;
+
         const valueAccessor = this.checkboxGroup ? this.checkboxGroup.valueAccessor : this.valueAccessor;
         if (valueAccessor.model instanceof Array) {
             valueAccessor.addOrRemove(this.value);

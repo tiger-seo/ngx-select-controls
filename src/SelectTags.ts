@@ -8,9 +8,10 @@ import {
     ContentChild,
     QueryList,
     ContentChildren,
-    Directive, Optional
+    Directive,
+    Optional
 } from "@angular/core";
-import {NG_VALIDATORS, NG_VALUE_ACCESSOR, AbstractControl} from "@angular/forms";
+import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectItems} from "./SelectItems";
 import {DROPDOWN_DIRECTIVES} from "ng2-dropdown";
 import {Observable} from "rxjs/Observable";

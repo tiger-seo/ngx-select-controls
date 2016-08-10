@@ -9,7 +9,10 @@ import {
     QueryList,
     Output,
     EventEmitter,
-    ContentChildren, Optional, OnInit, ContentChild
+    ContentChildren,
+    Optional,
+    OnInit,
+    ContentChild
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {CheckboxGroup} from "./CheckboxGroup";
@@ -143,7 +146,6 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
     background-color: #f5fafd;
 }
 .select-items .select-items-label {
-    padding-left: 3px;
     padding-right: 3px;
 }
 .select-items .select-items-group-header {

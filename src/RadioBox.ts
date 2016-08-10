@@ -6,16 +6,17 @@ import {
     HostBinding,
     HostListener,
     Optional,
-    Provider,
-    forwardRef
+    forwardRef,
+    Inject
 } from "@angular/core";
 import {NG_VALUE_ACCESSOR, NG_VALIDATORS} from "@angular/forms";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectValidator} from "./SelectValidator";
 import {RadioGroup} from "./RadioGroup";
+import {RadioItem} from "./RadioItem";
 
 @Directive({
-    selector: "input[type=radio][ngModel]",
+    selector: "radio-group input[type=radio], input[type=radio][ngModel]",
     providers: [
         SelectValueAccessor,
         SelectValidator,
@@ -43,6 +44,7 @@ export class RadioBox {
     // -------------------------------------------------------------------------
 
     constructor(private element: ElementRef, @Optional() @Host() private radioGroup: RadioGroup,
+                @Optional() @Host() @Inject(forwardRef(() => RadioItem)) private radioItem: RadioItem,
                 private valueAccessor: SelectValueAccessor,
                 private validator: SelectValidator) {
     }
@@ -53,6 +55,8 @@ export class RadioBox {
 
     @HostBinding("checked")
     get checked() {
+        if (this.radioItem) return this.radioItem.isChecked();
+
         const element: HTMLInputElement = this.element.nativeElement;
         const valueAccessor = this.radioGroup ? this.radioGroup.valueAccessor : this.valueAccessor;
         return valueAccessor.model === element.value;
@@ -60,6 +64,8 @@ export class RadioBox {
 
     @HostListener("click")
     check() {
+        if (this.radioItem) return;
+
         const element: HTMLInputElement = this.element.nativeElement;
         const valueAccessor = this.radioGroup ? this.radioGroup.valueAccessor : this.valueAccessor;
         valueAccessor.set(element.value);
