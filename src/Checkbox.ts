@@ -6,7 +6,7 @@ import {CheckboxGroup} from "./CheckboxGroup";
 import {CheckboxItem} from "./CheckboxItem";
 
 @Directive({
-    selector: "checkbox-group input[type=checkbox], input[type=checkbox][ngModel]",
+    selector: "[checkbox], input[type=checkbox][ngModel]",
     providers: [
         SelectValueAccessor,
         SelectValidator,

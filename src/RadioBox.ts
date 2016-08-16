@@ -16,7 +16,7 @@ import {RadioGroup} from "./RadioGroup";
 import {RadioItem} from "./RadioItem";
 
 @Directive({
-    selector: "radio-group input[type=radio], input[type=radio][ngModel]",
+    selector: "[radiobox], input[type=radio][ngModel]",
     providers: [
         SelectValueAccessor,
         SelectValidator,

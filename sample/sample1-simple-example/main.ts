@@ -12,33 +12,33 @@ import {Car} from "./Car";
 <div class="container">
 
     <h4>Is something enabled: (non-multiple checkbox)</h4>
-    <input type="checkbox" [(ngModel)]="isSomethingEnabled"/>
+    <input checkbox type="checkbox" [(ngModel)]="isSomethingEnabled"/>
     <i>isSomethingEnabled value:</i> <b>{{ isSomethingEnabled }}</b><br/><br/>
 
     <h4>Order by: (multiple check boxes)</h4>
-    <input type="checkbox" [(ngModel)]="orderBy" value="rating"> Rating<br/>
-    <input type="checkbox" [(ngModel)]="orderBy" value="date"> Date<br/>
-    <input type="checkbox" [(ngModel)]="orderBy" value="watches"> Watch count<br/>
-    <input type="checkbox" [(ngModel)]="orderBy" value="comments"> Comment count<br/>
+    <input checkbox type="checkbox" [(ngModel)]="orderBy" value="rating"> Rating<br/>
+    <input checkbox type="checkbox" [(ngModel)]="orderBy" value="date"> Date<br/>
+    <input checkbox type="checkbox" [(ngModel)]="orderBy" value="watches"> Watch count<br/>
+    <input checkbox type="checkbox" [(ngModel)]="orderBy" value="comments"> Comment count<br/>
     
     <i>selected items:</i> <b><span *ngFor="let order of orderBy">{{ order }} </span></b><br/><br/>
     
-
+    
     <h4>Sort by: (simple radio boxes)</h4>
-    <input type="radio" [(ngModel)]="sortWithoutGroup" value="rating"> Rating<br/>
-    <input type="radio" [(ngModel)]="sortWithoutGroup" value="date"> Date<br/>
-    <input type="radio" [(ngModel)]="sortWithoutGroup" value="watches"> Watch count<br/>
-    <input type="radio" [(ngModel)]="sortWithoutGroup" value="comments"> Comment count<br/>
+    <input radiobox type="radio" [(ngModel)]="sortWithoutGroup" value="rating"> Rating<br/>
+    <input radiobox type="radio" [(ngModel)]="sortWithoutGroup" value="date"> Date<br/>
+    <input radiobox type="radio" [(ngModel)]="sortWithoutGroup" value="watches"> Watch count<br/>
+    <input radiobox type="radio" [(ngModel)]="sortWithoutGroup" value="comments"> Comment count<br/>
     
     <i>selected item:</i> <b>{{ sortWithoutGroup }}</b><br/><br/>
 
 
     <h4>Sort by: (radio boxes wrapped in the group)</h4>
     <radio-group [(ngModel)]="sortBy">
-        <input type="radio" value="rating"> Rating<br/>
-        <input type="radio" value="date"> Date<br/>
-        <input type="radio" value="watches"> Watch count<br/>
-        <input type="radio" value="comments"> Comment count<br/>
+        <input radiobox type="radio" value="rating"> Rating<br/>
+        <input radiobox type="radio" value="date"> Date<br/>
+        <input radiobox type="radio" value="watches"> Watch count<br/>
+        <input radiobox type="radio" value="comments"> Comment count<br/>
     </radio-group>
     
     <i>selected item:</i> <b>{{ sortBy }}</b><br/><br/>
@@ -46,10 +46,10 @@ import {Car} from "./Car";
 
     <h4>Order by: (check boxes wrapped in the group)</h4>
     <checkbox-group [(ngModel)]="orderBy">
-        <input type="checkbox" value="rating"> Rating<br/>
-        <input type="checkbox" value="date"> Date<br/>
-        <input type="checkbox" value="watches"> Watch count<br/>
-        <input type="checkbox" value="comments"> Comment count<br/>
+        <input checkbox type="checkbox" value="rating"> Rating<br/>
+        <input checkbox type="checkbox" value="date"> Date<br/>
+        <input checkbox type="checkbox" value="watches"> Watch count<br/>
+        <input checkbox type="checkbox" value="comments"> Comment count<br/>
     </checkbox-group>
     
     <i>selected items:</i> <b><span *ngFor="let order of orderBy">{{ order }} </span></b><br/><br/>
@@ -82,11 +82,11 @@ import {Car} from "./Car";
 
     <form>
         <radio-group name="sortByControl" #sortByRadioGroup="ngModel" [(ngModel)]="sortBy" [required]="true">
-            <input type="radio" value=""> Not selected<br/>
-            <input type="radio" value="rating"> Rating<br/>
-            <input type="radio" value="date"> Date<br/>
-            <input type="radio" value="watches"> Watch count<br/>
-            <input type="radio" value="comments"> Comment count<br/>
+            <input radiobox type="radio" value=""> Not selected<br/>
+            <input radiobox type="radio" value="rating"> Rating<br/>
+            <input radiobox type="radio" value="date"> Date<br/>
+            <input radiobox type="radio" value="watches"> Watch count<br/>
+            <input radiobox type="radio" value="comments"> Comment count<br/>
         </radio-group>
         <div [hidden]="sortByRadioGroup.valid || sortByRadioGroup.pristine" class="alert alert-danger">
             Sort by is required
