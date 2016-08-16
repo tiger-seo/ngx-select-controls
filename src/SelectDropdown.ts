@@ -13,7 +13,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
     <div class="select-dropdown-dropdown dropdown" dropdown>
         <div class="select-dropdown-box" tabindex="1"
      (keydown)="onSelectTagsBoxKeydown($event)" dropdown-open>
-            <div *ngIf="valueAccessor.multiple">
+            <div *ngIf="isModelMultiple">
                 <span [class.hidden]="listSelectItems.getItems().length > 0">
                     <span class="no-selection" [class.readonly]="readonly" [class.disabled]="disabled">{{ readonly ? (readonlyLabel || label) : label }}</span>
                 </span>
@@ -26,7 +26,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                       [required]="required"
                       [readonly]="true"></select-items>
             </div>
-            <div *ngIf="!valueAccessor.multiple">
+            <div *ngIf="!isModelMultiple">
                 <span [class.hidden]="valueAccessor.model">
                     <span class="no-selection" [class.readonly]="readonly" [class.disabled]="disabled">{{ readonly ? (readonlyLabel || label) : label }}</span>
                 </span>
@@ -309,6 +309,14 @@ export class SelectDropdown {
     constructor(public valueAccessor: SelectValueAccessor,
                 private validator: SelectValidator,
                 @Optional() private defaultOptions: SelectControlsOptions) {
+    }
+
+    // -------------------------------------------------------------------------
+    // Accessors
+    // -------------------------------------------------------------------------
+
+    get isModelMultiple() {
+        return this.valueAccessor.model instanceof Array;
     }
 
     // -------------------------------------------------------------------------
