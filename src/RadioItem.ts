@@ -74,7 +74,9 @@ export class RadioItem {
     }
 
     isChecked() {
-        return this.radioGroup.valueAccessor.has(this.value);
+        return  (this.radioGroup.valueAccessor.model === undefined && this.value === undefined) ||
+                (this.radioGroup.valueAccessor.model === null && this.value === null) ||
+                this.radioGroup.valueAccessor.has(this.value);
     }
 
     isDisabled() {

@@ -69,7 +69,9 @@ export class CheckboxItem {
     }
 
     isChecked() {
-        return this.checkboxGroup.valueAccessor.has(this.value);
+        return  (this.checkboxGroup.valueAccessor.model === undefined && this.value === undefined) ||
+                (this.checkboxGroup.valueAccessor.model === null && this.value === null) ||
+                this.checkboxGroup.valueAccessor.has(this.value);
     }
 
     isDisabled() {
