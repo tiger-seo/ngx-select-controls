@@ -1,5 +1,4 @@
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {SELECT_CONTROL_DIRECTIVES} from "../../src/index";
+import {SelectControlsModule} from "../../src/index";
 import {Car} from "./Car";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {Component, NgModule} from "@angular/core";
@@ -8,7 +7,6 @@ import {FormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import "rxjs/Rx";
 import {Observable} from "rxjs/Rx";
-import {provideForms, disableDeprecatedForms} from "@angular/forms";
 
 @Component({
     selector: "app",
@@ -240,7 +238,6 @@ import {provideForms, disableDeprecatedForms} from "@angular/forms";
     
 </div>
 `,
-    directives: [SELECT_CONTROL_DIRECTIVES]
 })
 export class Sample5App {
 
@@ -297,7 +294,8 @@ export class Sample5App {
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        SelectControlsModule
     ],
     declarations: [
         Sample5App

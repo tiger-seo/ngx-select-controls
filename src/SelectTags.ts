@@ -13,7 +13,6 @@ import {
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectItems} from "./SelectItems";
-import {DROPDOWN_DIRECTIVES} from "ng2-dropdown";
 import {Observable} from "rxjs/Observable";
 import {WidthCalculator} from "./WidthCalculator";
 import {SelectValidator} from "./SelectValidator";
@@ -318,10 +317,6 @@ export class SelectTagsBoxTemplate {
 }
 `],
     encapsulation: ViewEncapsulation.None,
-    directives: [
-        SelectItems,
-        DROPDOWN_DIRECTIVES
-    ],
     providers: [
         Utils,
         SelectValueAccessor,

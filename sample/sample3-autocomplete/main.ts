@@ -1,7 +1,7 @@
 import "rxjs/Rx";
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {Component, NgModule} from "@angular/core";
-import {SELECT_CONTROL_DIRECTIVES} from "../../src/index";
+import {SelectControlsModule} from "../../src/index";
 import {Repository} from "./Repository";
 import {Http, HttpModule} from "@angular/http";
 import {Observable} from "rxjs/Rx";
@@ -215,7 +215,6 @@ import {BrowserModule} from "@angular/platform-browser";
         
 </div>
 `,
-    directives: [SELECT_CONTROL_DIRECTIVES]
 })
 export class Sample3App {
 
@@ -265,7 +264,8 @@ export class Sample3App {
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        SelectControlsModule
     ],
     declarations: [
         Sample3App

@@ -202,9 +202,6 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
 }
 `],
     encapsulation: ViewEncapsulation.None,
-    directives: [
-        RadioGroup, RadioItem, CheckboxGroup, CheckboxItem, ItemTemplateTransclude
-    ],
     providers: [
         SelectValueAccessor,
         SelectValidator,

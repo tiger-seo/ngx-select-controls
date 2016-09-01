@@ -10,8 +10,6 @@ import {
     Optional
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {SelectItems} from "./SelectItems";
-import {DROPDOWN_DIRECTIVES} from "ng2-dropdown";
 import {Observable} from "rxjs/Observable";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectValidator} from "./SelectValidator";
@@ -156,10 +154,6 @@ export class AutocompleteDropdownTemplate {
 }
 `],
     encapsulation: ViewEncapsulation.None,
-    directives: [
-        SelectItems,
-        DROPDOWN_DIRECTIVES
-    ],
     providers: [
         Utils,
         SelectValueAccessor,

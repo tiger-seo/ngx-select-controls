@@ -1,10 +1,10 @@
 import {Component, Input, ViewEncapsulation, ViewChild, Optional} from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectItems} from "./SelectItems";
-import {DROPDOWN_DIRECTIVES, Dropdown} from "ng2-dropdown";
 import {SelectValidator} from "./SelectValidator";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectControlsOptions} from "./SelectControlsOptions";
+import {Dropdown} from "./Dropdown";
 
 @Component({
     selector: "select-dropdown",
@@ -173,10 +173,6 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
 }
 `],
     encapsulation: ViewEncapsulation.None,
-    directives: [
-        SelectItems,
-        DROPDOWN_DIRECTIVES
-    ],
     providers: [
         SelectValueAccessor,
         SelectValidator,
