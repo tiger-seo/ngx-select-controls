@@ -236,6 +236,17 @@ import {Observable} from "rxjs/Rx";
     <h4>model: </h4>
     <pre>{{ selectedCars17 | json }}</pre>
     
+    <h4>Select tags with autofocus set:</h4>
+    <select-tags [(ngModel)]="selectedCars18"
+                [persist]="true"
+                [autofocus]="true"
+                [loader]="loader"
+                labelBy="name"
+                trackBy="name"></select-tags>
+
+    <h4>model: </h4>
+    <pre>{{ selectedCars18 | json }}</pre>
+    
 </div>
 `,
 })
@@ -274,11 +285,12 @@ export class Sample5App {
     ];
     selectedCars16: Car[] = [];
     selectedCars17: Car[] = [];
+    selectedCars18: Car[] = [];
 
     loader = (term: string) => {
         return this.http
             .get("https://api.github.com/search/repositories?q=" + term)
-            .map(res => res.json().itemTemplates) as Observable<any>;
+            .map(res => res.json().items) as Observable<any>;
     };
 
     itemConstructor = (term: string) => {

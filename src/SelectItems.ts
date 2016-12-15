@@ -305,6 +305,12 @@ export class SelectItems implements AfterViewInit, OnInit {
     filter: (items: any[]) => any[];
 
     @Input()
+    exclude: any[];
+
+    @Input()
+    reverse: boolean;
+
+    @Input()
     customToggleLogic: (options: { event: MouseEvent, valueAccessor: SelectValueAccessor }) => void;
 
     @Output()
@@ -563,6 +569,20 @@ export class SelectItems implements AfterViewInit, OnInit {
         if (this.filter)
             this.filter(items);
 
+        if (this.exclude) {
+            items = items.filter(item => {
+                return this.exclude.every(excluded => {
+                    if (this.trackBy instanceof Function) {
+                        return !(this.trackBy as ((item1: any, item2: any) => boolean))(item, excluded);
+                    } else if (this.trackBy) {
+                        return excluded[this.trackBy as string] !== item[this.trackBy as string];
+                    } else {
+                        return item !== excluded;
+                    }
+                });
+            });
+        }
+
         if (this.groupBy && group) {
             items = items.filter(item => {
                 if (typeof this.groupBy === "string") {
@@ -572,6 +592,9 @@ export class SelectItems implements AfterViewInit, OnInit {
                 }
             });
         }
+
+        if (this.reverse)
+            items = items.reverse();
 
         return items;
     }

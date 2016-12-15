@@ -298,6 +298,30 @@ import {Car} from "./Car";
     
     <h4>model: </h4>
     <pre>{{ selectedCars21 | json }}</pre>
+ 
+    <h4>Select items with excluded items:</h4>
+    <select-items [(ngModel)]="selectedCars23"
+                  [items]="cars"
+                  [exclude]="excludedCars"
+                  [multiple]="true"
+                  labelBy="name"
+                  trackBy="id">
+    </select-items>
+    
+    <h4>model: </h4>
+    <pre>{{ selectedCars23 | json }}</pre>
+     
+    <h4>Select items with items shown in the reverse order:</h4>
+    <select-items [(ngModel)]="selectedCars24"
+                  [items]="cars"
+                  [multiple]="true"
+                  [reverse]="true"
+                  labelBy="name"
+                  trackBy="id">
+    </select-items>
+    
+    <h4>model: </h4>
+    <pre>{{ selectedCars24 | json }}</pre>
      
     <!-- SAME WITH RADIO -->
     
@@ -530,6 +554,12 @@ export class Sample2App {
         new Car(15, "Mitsubishi", 2000),
     ];
 
+    excludedCars: Car[] = [
+        new Car(1, "BMW", 2000),
+        new Car(5, "Ferrari", 2000),
+        new Car(7, "Nissan", 1940)
+    ];
+
     selectedCars: Car[] = [];
     selectedCars1: Car[] = [];
     selectedCars2: Car[] = [];
@@ -556,9 +586,12 @@ export class Sample2App {
         new Car(2, "Mercedes", 1999)
     ];
     selectedCars22: Car[] = [];
+    selectedCars23: Car[] = [];
+    selectedCars24: Car[] = [];
     selectedCarNames: string[] = [];
 
     selectedCar: Car;
+    selectedCar2: Car;
     secondSelectedCar: Car = new Car(2, "Mercedes", 1999);
     selectedCarName: string;
 

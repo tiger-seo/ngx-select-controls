@@ -35,6 +35,7 @@ export class AutocompleteDropdownTemplate {
         <div class="autocomplete-input" [class.autocomplete-input-group]="valueAccessor.multiple && persist">
             <input dropdown-open
                    type="text"
+                   [autofocus]="autofocus"
                    [placeholder]="placeholder"
                    [disabled]="isDisabled()"
                    [(ngModel)]="term"
@@ -54,6 +55,7 @@ export class AutocompleteDropdownTemplate {
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"
                 [items]="items"
+                [exclude]="exclude"
                 [hideSelected]="true"
                 [hideControls]="true"
                 [multiple]="valueAccessor.multiple"
@@ -65,6 +67,7 @@ export class AutocompleteDropdownTemplate {
                 [orderBy]="orderBy"
                 [orderDirection]="orderDirection"
                 [disableBy]="disableBy"
+                [reverse]="reverse"
                 [customItemTemplates]="dropdownTemplate?.itemTemplates"></select-items>
         </div>
     </div>
@@ -223,6 +226,18 @@ export class Autocomplete implements OnInit {
     disabled: boolean = false;
 
     /**
+     * Sets autofocus to autocomplete input.
+     */
+    @Input()
+    autofocus: boolean = false;
+
+    /**
+     * Indicates if items in the dropdown should be shown in the reverse order.
+     */
+    @Input()
+    reverse: boolean;
+
+    /**
      * Specifies a property name which will be used to determine object's label in the input.
      * For example if your item is an object and you would like to show its name in the autocomplete input you must
      * provide a property of that object which serves as this object's name.
@@ -334,6 +349,12 @@ export class Autocomplete implements OnInit {
      */
     @Input()
     maxModelSize: number;
+
+    /**
+     * Items needs to be excluded from the list of options provided by autocomplete in the dropdown.
+     */
+    @Input()
+    exclude: any[];
 
     /**
      * If you want to create new items your way (lets say you want to initialize a class X), you can use this item

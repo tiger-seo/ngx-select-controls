@@ -72,6 +72,7 @@ export class SelectTagsBoxTemplate {
                    [class.hidden]="items && valueAccessor.model && items.length === valueAccessor.model.length && !loader"
                    dropdown-open
                    type="text"
+                   [autofocus]="autofocus"
                    [placeholder]="placeholder"
                    [disabled]="isDisabled()"
                    [(ngModel)]="term"
@@ -100,6 +101,7 @@ export class SelectTagsBoxTemplate {
                 [(ngModel)]="valueAccessor.model" 
                 (ngModelChange)="onModelChange($event)"
                 [items]="items"
+                [exclude]="exclude"
                 [keyword]="term"
                 [hideSelected]="true"
                 [hideControls]="true"
@@ -115,6 +117,7 @@ export class SelectTagsBoxTemplate {
                 [selectAll]="selectAll"
                 [selectAllLabel]="selectAllLabel"
                 [disableBy]="disableBy"
+                [reverse]="reverse"
                 [customItemTemplates]="selectDropdownTemplate?.itemTemplates">
             </select-items>
         </div>
@@ -416,6 +419,15 @@ export class SelectTags implements OnInit {
     @Input()
     filter: (items: any[]) => any[];
 
+    @Input()
+    exclude: any[];
+
+    @Input()
+    autofocus: boolean = false;
+
+    @Input()
+    reverse: boolean;
+
     // -------------------------------------------------------------------------
     // Input accessors
     // -------------------------------------------------------------------------
@@ -574,15 +586,21 @@ export class SelectTags implements OnInit {
         if (loaderResult instanceof Promise) {
             loaderResult.then(items => {
                 this.lastLoadTerm = this.term;
-                this.items = items;
                 this.itemsAreLoaded = true;
+                this.items = items;
             });
 
         } else if (loaderResult instanceof Observable) {
             loaderResult.subscribe(items => {
                 this.lastLoadTerm = this.term;
-                this.items = items;
                 this.itemsAreLoaded = true;
+                this.items = [];
+                if (items instanceof Array) {
+                    items = items.filter((item: any) => {
+                        return !this.valueAccessor.has(item);
+                    });
+                    this.items = items;
+                }
             });
         }
     }

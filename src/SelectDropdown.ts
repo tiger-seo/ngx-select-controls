@@ -44,6 +44,7 @@ import {Dropdown} from "./Dropdown";
                     [(ngModel)]="valueAccessor.model" 
                     (ngModelChange)="onModelChange($event)" 
                     [items]="items"
+                    [exclude]="exclude"
                     [multiple]="valueAccessor.multiple"
                     [limit]="limit"
                     [disabled]="disabled"
@@ -251,6 +252,9 @@ export class SelectDropdown {
 
     @Input()
     filter: (items: any[]) => any[];
+
+    @Input()
+    exclude: any[];
 
     // -------------------------------------------------------------------------
     // Input accessors
