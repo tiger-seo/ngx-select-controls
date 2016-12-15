@@ -51,7 +51,6 @@ export class SelectTagsBoxTemplate {
         <div #selectTagsBox
             (click)="focusTagsInput()" 
             (keydown)="onSelectTagsBoxKeydown($event)"
-            tabindex="1" 
             class="select-tags-box">
             <select-items #tagSelectItems
                 [(ngModel)]="selectedItems"
