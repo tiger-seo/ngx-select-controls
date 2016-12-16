@@ -237,12 +237,14 @@ import {Observable} from "rxjs/Rx";
     <pre>{{ selectedCars17 | json }}</pre>
     
     <h4>Select tags with autofocus set:</h4>
-    <select-tags [(ngModel)]="selectedCars18"
-                [persist]="true"
-                [autofocus]="true"
-                [loader]="loader"
-                labelBy="name"
-                trackBy="name"></select-tags>
+    <form>
+        <select-tags [(ngModel)]="selectedCars18"
+                    [persist]="true"
+                    [autofocus]="true"
+                    [loader]="loader"
+                    labelBy="name"
+                    trackBy="name"></select-tags>
+    </form>
 
     <h4>model: </h4>
     <pre>{{ selectedCars18 | json }}</pre>

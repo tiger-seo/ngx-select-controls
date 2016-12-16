@@ -9,7 +9,7 @@ import {
     QueryList,
     ContentChildren,
     Directive,
-    Optional
+    Optional, EventEmitter, Output
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectItems} from "./SelectItems";
@@ -427,6 +427,9 @@ export class SelectTags implements OnInit {
     @Input()
     reverse: boolean;
 
+    @Output()
+    onSelect = new EventEmitter();
+
     // -------------------------------------------------------------------------
     // Input accessors
     // -------------------------------------------------------------------------
@@ -443,7 +446,7 @@ export class SelectTags implements OnInit {
     }
 
     @Input()
-    set valueBy(valueBy: string|((item: any) => string)) {
+    set valueBy(valueBy: string|((item: any) => any)) {
         this.valueAccessor.valueBy = valueBy;
     }
 
@@ -564,6 +567,17 @@ export class SelectTags implements OnInit {
     // Public Methods
     // -------------------------------------------------------------------------
 
+    getItemsFromSelectedItems() {
+        let items = this.dropdownSelectItems.getItems();
+        items = items.filter(item => {
+            return this.selectedItems.some(selectedItem => {
+                return selectedItem === this.dropdownSelectItems.getItemValue(item);
+            });
+        });
+        // console.log(items);
+        return items;
+    }
+
     onTermChange(term: string) {
         this.originalModel = false;
         this.dropdownSelectItems.resetActive();
@@ -583,24 +597,26 @@ export class SelectTags implements OnInit {
         const loaderResult = this.loader(this.term);
 
         if (loaderResult instanceof Promise) {
-            loaderResult.then(items => {
-                this.lastLoadTerm = this.term;
-                this.itemsAreLoaded = true;
-                this.items = items;
-            });
-
+            loaderResult.then(items => this.prepareLoadedItems(items));
         } else if (loaderResult instanceof Observable) {
-            loaderResult.subscribe(items => {
-                this.lastLoadTerm = this.term;
-                this.itemsAreLoaded = true;
-                this.items = [];
-                if (items instanceof Array) {
-                    items = items.filter((item: any) => {
-                        return !this.valueAccessor.has(item);
-                    });
-                    this.items = items;
-                }
+            loaderResult.subscribe(items => this.prepareLoadedItems(items));
+        } else {
+            this.prepareLoadedItems(loaderResult);
+        }
+    }
+
+    prepareLoadedItems(items: any) {
+        this.lastLoadTerm = this.term;
+        this.itemsAreLoaded = true;
+        this.items = [];
+        if (items instanceof Array) {
+            items = items.filter((item: any) => {
+                if (this.valueBy)
+                    return !this.valueAccessor.has(this.valueAccessor.extractModelValue(item));
+
+                return !this.valueAccessor.has(item);
             });
+            this.items = items;
         }
     }
 
@@ -615,6 +631,7 @@ export class SelectTags implements OnInit {
         this.term = "";
         this.recalculateInputWidth(undefined, this.term);
         this.focusTagsInput();
+        this.onSelect.emit({ value: model, items: this.items });
         if (this.itemsAreLoaded)
             this.items = [];
     }

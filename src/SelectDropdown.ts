@@ -19,9 +19,9 @@ import {Dropdown} from "./Dropdown";
                 </span>
                 <select-items #listSelectItems
                       [hideControls]="true"
-                      [items]="dropdownSelectItems.getSelectedItems()"
-                      [labelBy]="valueBy ? listLabelBy : (listLabelBy || labelBy)"
-                      [trackBy]="valueBy ? listTrackBy : (listTrackBy || trackBy)"
+                      [items]="getSelectedItems()"
+                      [labelBy]="labelBy"
+                      [trackBy]="trackBy"
                       [disabled]="disabled"
                       [required]="required"
                       [readonly]="true"></select-items>
@@ -200,12 +200,6 @@ export class SelectDropdown {
     readonlyLabel: string;
 
     @Input()
-    listTrackBy: string|((item: any) => string);
-
-    @Input()
-    listLabelBy: string|((item: any) => string);
-
-    @Input()
     labelBy: string|((item: any) => string);
 
     @Input()
@@ -323,9 +317,18 @@ export class SelectDropdown {
     // Public Methods
     // -------------------------------------------------------------------------
 
+    getSelectedItems() {
+        const selectedItems = this.selectItems.getSelectedItems();
+        return this.items.filter(item => {
+            return !!selectedItems.find(selectedItem => {
+                return this.valueAccessor.extractModelValue(item) === selectedItem;
+            });
+        });
+    }
+
     getItemLabel(item: any) {// todo: duplication
         if (!item) return "";
-        const labelBy = this.valueBy ? this.listLabelBy : (this.listLabelBy || this.labelBy);
+        const labelBy = this.labelBy;
 
         if (labelBy) {
             if (typeof labelBy === "string") {

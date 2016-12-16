@@ -179,7 +179,7 @@ export class SelectValueAccessor implements ControlValueAccessor {
         return has;
     }
 
-    private extractModelValue(model: any) {
+    extractModelValue(model: any) {
         if (this.valueBy) {
             return this.extractValue(model, this.valueBy);
         } else {
