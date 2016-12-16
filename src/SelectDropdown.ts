@@ -328,8 +328,8 @@ export class SelectDropdown {
 
     getItemLabel(item: any) { // todo: duplication
         if (!item) return "";
-        item = this.items.find(item => {
-            return this.valueAccessor.extractModelValue(item) === item; // todo: what about track by?
+        item = this.items.find(itemFromList => {
+            return this.valueAccessor.extractModelValue(itemFromList) === item; // todo: what about track by?
         });
 
         if (this.labelBy) {
