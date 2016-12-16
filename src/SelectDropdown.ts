@@ -321,21 +321,23 @@ export class SelectDropdown {
         const selectedItems = this.selectItems.getSelectedItems();
         return this.items.filter(item => {
             return !!selectedItems.find(selectedItem => {
-                return this.valueAccessor.extractModelValue(item) === selectedItem;
+                return this.valueAccessor.extractModelValue(item) === selectedItem; // todo: what about track by?
             });
         });
     }
 
-    getItemLabel(item: any) {// todo: duplication
+    getItemLabel(item: any) { // todo: duplication
         if (!item) return "";
-        const labelBy = this.labelBy;
+        item = this.items.find(item => {
+            return this.valueAccessor.extractModelValue(item) === item; // todo: what about track by?
+        });
 
-        if (labelBy) {
-            if (typeof labelBy === "string") {
-                return item[labelBy as string];
+        if (this.labelBy) {
+            if (typeof this.labelBy === "string") {
+                return item[this.labelBy as string];
 
-            } else if (typeof labelBy === "function") {
-                return (labelBy as any)(item);
+            } else if (typeof this.labelBy === "function") {
+                return (this.labelBy as any)(item);
             }
         }
 
