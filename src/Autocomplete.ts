@@ -7,7 +7,7 @@ import {
     ContentChildren,
     QueryList,
     ContentChild,
-    Optional
+    Optional, EventEmitter, Output
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
@@ -363,6 +363,9 @@ export class Autocomplete implements OnInit {
     @Input()
     itemConstructor: ((term: string) => any);
 
+    @Output()
+    onSelect = new EventEmitter();
+
     // -------------------------------------------------------------------------
     // Public Properties
     // -------------------------------------------------------------------------
@@ -488,14 +491,23 @@ export class Autocomplete implements OnInit {
         if (!this.valueAccessor.multiple && model) {
             this.term = this.getItemLabel(model);
             this.lastLoadTerm = this.term;
+            this.onSelect.emit({ value: model, items: this.items });
             if (this.itemsAreLoaded)
                 this.items = [];
         } else {
             this.lastLoadTerm = "";
             this.term = "";
+            this.onSelect.emit({ value: "", items: this.items });
             if (this.itemsAreLoaded)
                 this.items = [];
         }
+    }
+
+    /**
+     * Refreshes term in the autocomplete. Used for external libraries.
+     */
+    refreshTerm() {
+        this.term = this.getItemLabel(this.valueAccessor.model);
     }
 
     /**
