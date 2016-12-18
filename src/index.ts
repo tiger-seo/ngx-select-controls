@@ -27,6 +27,7 @@ export * from "./Autocomplete";
 export * from "./SelectDropdown";
 export * from "./SelectTags";
 export * from "./ItemTemplate";
+export * from "./DropdownOpen";
 
 @NgModule({
     imports: [
