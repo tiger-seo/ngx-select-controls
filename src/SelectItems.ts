@@ -28,7 +28,7 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
     selector: "select-items",
     template: `
 <div class="select-items">
-    <div [class.hidden]="!searchBy">
+    <div [class.hidden]="!searchLabel">
         <input class="select-items-search" type="text" [(ngModel)]="keyword" [placeholder]="searchLabel">
     </div>
     <div class="select-items-multiple" *ngIf="valueAccessor.multiple">
@@ -567,7 +567,7 @@ export class SelectItems implements AfterViewInit, OnInit {
         }
 
         if (this.filter)
-            this.filter(items);
+            items = this.filter(items);
 
         if (this.exclude) {
             items = items.filter(item => {

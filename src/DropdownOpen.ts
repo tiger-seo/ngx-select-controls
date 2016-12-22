@@ -72,25 +72,21 @@ export class DropdownOpen implements OnDestroy {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // Lifecycle Methods
-    // -------------------------------------------------------------------------
-
-    ngOnDestroy() {
-        document.removeEventListener("click", this.closeDropdownOnOutsideClick);
-    }
-
-    // -------------------------------------------------------------------------
-    // Private Methods
-    // -------------------------------------------------------------------------
-
-    private close(event: Event) {
+    close(event: Event) {
         if (!this.dropdown.isInClosableZone(<HTMLElement> event.target)
             && event.target !== this.elementRef.nativeElement
             && !this.elementRef.nativeElement.contains(event.target)) {
             this.dropdown.close();
             document.removeEventListener("click", this.closeDropdownOnOutsideClick);
         }
+    }
+
+    // -------------------------------------------------------------------------
+    // Lifecycle Methods
+    // -------------------------------------------------------------------------
+
+    ngOnDestroy() {
+        document.removeEventListener("click", this.closeDropdownOnOutsideClick);
     }
 
 }

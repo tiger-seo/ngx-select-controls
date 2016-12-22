@@ -7,7 +7,7 @@ import {
     ContentChildren,
     QueryList,
     ContentChild,
-    Optional, EventEmitter, Output
+    Optional, EventEmitter, Output, ViewChild
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
@@ -16,6 +16,8 @@ import {SelectValidator} from "./SelectValidator";
 import {Utils} from "./Utils";
 import {ItemTemplate} from "./ItemTemplate";
 import {SelectControlsOptions} from "./SelectControlsOptions";
+import {DropdownOpen} from "./DropdownOpen";
+import {Dropdown} from "./Dropdown";
 
 @Directive({
     selector: "autocomplete-dropdown-template"
@@ -56,6 +58,7 @@ export class AutocompleteDropdownTemplate {
                 (ngModelChange)="onModelChange($event)"
                 [items]="items"
                 [exclude]="exclude"
+                [keyword]="term"
                 [hideSelected]="true"
                 [hideControls]="true"
                 [multiple]="valueAccessor.multiple"
@@ -63,6 +66,7 @@ export class AutocompleteDropdownTemplate {
                 [labelBy]="labelBy"
                 [trackBy]="trackBy"
                 [valueBy]="valueBy"
+                [searchBy]="labelBy"
                 [limit]="limit"
                 [orderBy]="orderBy"
                 [orderDirection]="orderDirection"
@@ -377,6 +381,9 @@ export class Autocomplete implements OnInit {
     @ContentChild(AutocompleteDropdownTemplate)
     dropdownTemplate: AutocompleteDropdownTemplate;
 
+    @ViewChild(Dropdown)
+    dropdown: Dropdown;
+
     // -------------------------------------------------------------------------
     // Private Properties
     // -------------------------------------------------------------------------
@@ -501,6 +508,8 @@ export class Autocomplete implements OnInit {
             if (this.itemsAreLoaded)
                 this.items = [];
         }
+
+        this.dropdown.close();
     }
 
     /**

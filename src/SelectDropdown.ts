@@ -319,11 +319,15 @@ export class SelectDropdown {
 
     getSelectedItems() {
         const selectedItems = this.selectItems.getSelectedItems();
-        return this.items.filter(item => {
-            return !!selectedItems.find(selectedItem => {
-                return this.valueAccessor.extractModelValue(item) === selectedItem; // todo: what about track by?
+        if (this.valueBy) {
+            return this.items.filter(item => {
+                return !!selectedItems.find(selectedItem => {
+                    return this.valueAccessor.extractModelValue(item) === selectedItem; // todo: what about track by?
+                });
             });
-        });
+        }
+
+        return selectedItems;
     }
 
     getItemLabel(item: any) { // todo: duplication
