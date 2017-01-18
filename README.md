@@ -1,26 +1,26 @@
-# ng2-radio-group
+# ngx-radio-group
 
 Ultimate set of select components that you ever need. All with angular2, no jquery.
 Checkbox group and radio group control for your angular2 applications. Does not depend of jquery.
 Please star a project if you liked it, or create an issue if you have problems with it.
 
-![angular 2 radio groups and checkbox groups](https://raw.githubusercontent.com/pleerock/ng2-radio-group/master/resources/radio-group-example.png)
+![angular 2 radio groups and checkbox groups](https://raw.githubusercontent.com/pleerock/ngx-radio-group/master/resources/radio-group-example.png)
 
 ## Installation
 
 1. Install npm module:
 
-    `npm install ng2-radio-group --save`
+    `npm install ngx-radio-group --save`
 
 2. If you are using system.js you may want to add this into `map` and `package` config:
 
     ```json
     {
         "map": {
-            "ng2-radio-group": "node_modules/ng2-radio-group"
+            "ngx-radio-group": "node_modules/ngx-radio-group"
         },
         "packages": {
-            "ng2-radio-group": { "main": "index.js", "defaultExtension": "js" }
+            "ngx-radio-group": { "main": "index.js", "defaultExtension": "js" }
         }
     }
     ```
@@ -148,7 +148,7 @@ Complete example of usage:
 
 ```typescript
 import {Component} from "@angular/core";
-import {RADIO_GROUP_DIRECTIVES} from "ng2-radio-group";
+import {RADIO_GROUP_DIRECTIVES} from "ngx-radio-group";
 
 @Component({
     selector: "app",
@@ -257,7 +257,7 @@ export class App {
 }
 ```
 
-Take a look on samples in [./sample](https://github.com/pleerock/ng2-radio-group/tree/master/sample) for more examples of
+Take a look on samples in [./sample](https://github.com/pleerock/ngx-radio-group/tree/master/sample) for more examples of
 usages.
 
 ## Release notes
