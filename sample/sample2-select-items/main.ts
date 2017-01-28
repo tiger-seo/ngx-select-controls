@@ -322,6 +322,19 @@ import {Car} from "./Car";
     
     <h4>model: </h4>
     <pre>{{ selectedCars24 | json }}</pre>
+ 
+    <h4>Select items with disabled items:</h4>
+    <select-items [(ngModel)]="selectedCars25"
+                  [items]="cars"
+                  [disable]="disabledCars"
+                  disableMessage="Cannot select this can because its disabled. Please buy this car first!"
+                  [multiple]="true"
+                  labelBy="name"
+                  trackBy="id">
+    </select-items>
+    
+    <h4>model: </h4>
+    <pre>{{ selectedCars25 | json }}</pre>
      
     <!-- SAME WITH RADIO -->
     
@@ -560,6 +573,12 @@ export class Sample2App {
         new Car(7, "Nissan", 1940)
     ];
 
+    disabledCars: Car[] = [
+        new Car(1, "BMW", 2000),
+        new Car(5, "Ferrari", 2000),
+        new Car(7, "Nissan", 1940)
+    ];
+
     selectedCars: Car[] = [];
     selectedCars1: Car[] = [];
     selectedCars2: Car[] = [];
@@ -588,6 +607,7 @@ export class Sample2App {
     selectedCars22: Car[] = [];
     selectedCars23: Car[] = [];
     selectedCars24: Car[] = [];
+    selectedCars25: Car[] = [];
     selectedCarNames: string[] = [];
 
     selectedCar: Car;

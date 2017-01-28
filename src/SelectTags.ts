@@ -101,6 +101,8 @@ export class SelectTagsBoxTemplate {
                 (ngModelChange)="onModelChange($event)"
                 [items]="items"
                 [exclude]="exclude"
+                [disable]="disable"
+                [disableMessage]="disableMessage"
                 [keyword]="term"
                 [hideSelected]="true"
                 [hideControls]="true"
@@ -420,6 +422,12 @@ export class SelectTags implements OnInit {
 
     @Input()
     exclude: any[];
+
+    @Input()
+    disable: any[];
+
+    @Input()
+    disableMessage: string;
 
     @Input()
     autofocus: boolean = false;

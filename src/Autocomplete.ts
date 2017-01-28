@@ -58,6 +58,8 @@ export class AutocompleteDropdownTemplate {
                 (ngModelChange)="onModelChange($event)"
                 [items]="items"
                 [exclude]="exclude"
+                [disable]="disable"
+                [disableMessage]="disableMessage"
                 [keyword]="term"
                 [hideSelected]="true"
                 [hideControls]="true"
@@ -360,6 +362,12 @@ export class Autocomplete implements OnInit {
     @Input()
     exclude: any[];
 
+    @Input()
+    disable: any[];
+
+    @Input()
+    disableMessage: string;
+
     /**
      * If you want to create new items your way (lets say you want to initialize a class X), you can use this item
      * constructor function.
@@ -375,6 +383,8 @@ export class Autocomplete implements OnInit {
     // -------------------------------------------------------------------------
 
     term: string;
+
+    emptyModelTerm: string;
 
     lastLoadTerm: string = "";
 
@@ -406,6 +416,10 @@ export class Autocomplete implements OnInit {
                 this.originalModel = true;
             if (this.initialized)
                 this.term = this.getItemLabel(model);
+            if (this.emptyModelTerm && !model) {
+                this.term = this.emptyModelTerm;
+                this.emptyModelTerm = "";
+            }
         });
     }
 

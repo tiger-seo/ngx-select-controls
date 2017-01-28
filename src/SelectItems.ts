@@ -59,6 +59,8 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                     [class.hide-controls]="hideControls"
                     [class.with-remove-button]="removeButton"
                     [class.selected]="checkboxItem.isChecked()"
+                    [class.disabled]="isItemDisabled(item)"
+                    [title]="isItemDisabled(item) ? disableMessage : ''"
                     class="select-items-item item">
                     <checkbox-item #checkboxItem
                         (onSelect)="onSelect.emit($event)"
@@ -97,6 +99,8 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
                     [class.hide-controls]="hideControls"
                     [class.with-remove-button]="removeButton"
                     [class.selected]="radioItem.isChecked()"
+                    [class.disabled]="isItemDisabled(item)"
+                    [title]="isItemDisabled(item) ? disableMessage : ''"
                     class="select-items-item item">
                     <radio-item #radioItem
                         (onSelect)="onSelect.emit($event)"
@@ -136,6 +140,9 @@ import {SelectControlsOptions} from "./SelectControlsOptions";
 .select-items .select-items-item.hide-controls.selected {
     background: #337ab7;
     color: #FFF;
+}
+.select-items .select-items-item.disabled {
+    color: #CCC;
 }
 .select-items .select-items-item.selected.active {
     background: #469FE0;
@@ -308,6 +315,12 @@ export class SelectItems implements AfterViewInit, OnInit {
     exclude: any[];
 
     @Input()
+    disable: any[];
+
+    @Input()
+    disableMessage: string;
+
+    @Input()
     reverse: boolean;
 
     @Input()
@@ -424,6 +437,20 @@ export class SelectItems implements AfterViewInit, OnInit {
     isItemDisabled(item: any) {
         if (this.disabled)
             return true;
+
+        if (this.disable && this.disable.length > 0) {
+            const isDisabled = this.disable.every(disabled => {
+                if (this.trackBy instanceof Function) {
+                    return !(this.trackBy as ((item1: any, item2: any) => boolean))(item, disabled);
+                } else if (this.trackBy) {
+                    return disabled[this.trackBy as string] !== item[this.trackBy as string];
+                } else {
+                    return item !== disabled;
+                }
+            });
+            if (isDisabled === true)
+                return true;
+        }
 
         if (this.disableBy) {
             if (typeof this.disableBy === "string") {
