@@ -439,13 +439,13 @@ export class SelectItems implements AfterViewInit, OnInit {
             return true;
 
         if (this.disable && this.disable.length > 0) {
-            const isDisabled = this.disable.every(disabled => {
+            const isDisabled = this.disable.some(disabled => {
                 if (this.trackBy instanceof Function) {
-                    return !(this.trackBy as ((item1: any, item2: any) => boolean))(item, disabled);
+                    return (this.trackBy as ((item1: any, item2: any) => boolean))(item, disabled);
                 } else if (this.trackBy) {
-                    return disabled[this.trackBy as string] !== item[this.trackBy as string];
+                    return disabled[this.trackBy as string] === item[this.trackBy as string];
                 } else {
-                    return item !== disabled;
+                    return item === disabled;
                 }
             });
             if (isDisabled === true)
