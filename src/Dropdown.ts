@@ -27,7 +27,7 @@ export class Dropdown {
     // Properties
     // -------------------------------------------------------------------------
 
-    @ContentChild(DropdownNotClosableZone)
+    @ContentChild(DropdownNotClosableZone, {static: true})
     notClosableZone: DropdownNotClosableZone;
 
     // -------------------------------------------------------------------------

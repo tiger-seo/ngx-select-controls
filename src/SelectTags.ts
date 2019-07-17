@@ -13,7 +13,7 @@ import {
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SelectItems} from "./SelectItems";
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs";
 import {WidthCalculator} from "./WidthCalculator";
 import {SelectValidator} from "./SelectValidator";
 import {SelectValueAccessor} from "./SelectValueAccessor";
@@ -495,27 +495,27 @@ export class SelectTags implements OnInit {
     // -------------------------------------------------------------------------
     // Public Properties
     // -------------------------------------------------------------------------
-    
+
     term: string = "";
     lastLoadTerm: string = "";
     selectedItems: any[] = [];
 
-    @ViewChild("dropdownSelectItems")
+    @ViewChild("dropdownSelectItems", {static: true})
     dropdownSelectItems: SelectItems;
 
-    @ViewChild("selectTagsBoxInput")
+    @ViewChild("selectTagsBoxInput", {static: true})
     selectTagsBoxInput: ElementRef;
 
-    @ViewChild("tagSelectItems")
+    @ViewChild("tagSelectItems", {static: true})
     tagSelectItems: SelectItems;
 
-    @ViewChild("selectTagsBox")
+    @ViewChild("selectTagsBox", {static: true})
     selectTagsBox: ElementRef;
 
-    @ContentChild(SelectTagsDropdownTemplate)
+    @ContentChild(SelectTagsDropdownTemplate, {static: true})
     selectDropdownTemplate: SelectTagsDropdownTemplate;
 
-    @ContentChild(SelectTagsBoxTemplate)
+    @ContentChild(SelectTagsBoxTemplate, {static: true})
     selectTagsTemplate: SelectTagsBoxTemplate;
 
     selectItemsToggleLogic = (options: { event: MouseEvent, valueAccessor: SelectValueAccessor, value: any }) => {
@@ -698,9 +698,9 @@ export class SelectTags implements OnInit {
      * Gets item's label.
      */
     getItemLabel(item: any) { // todo: duplication
-        if (!item) return ""; 
+        if (!item) return "";
         const labelBy = this.valueBy ? this.listLabelBy : (this.listLabelBy || this.labelBy);
-        
+
         if (labelBy) {
             if (typeof labelBy === "string") {
                 return item[labelBy as string];

@@ -382,7 +382,7 @@ export class SelectItems implements AfterViewInit, OnInit {
     @Input()
     customItemTemplates: QueryList<ItemTemplate>;
 
-    @ContentChild(Items)
+    @ContentChild(Items, {static: true})
     contentItems: Items;
 
     // -------------------------------------------------------------------------
@@ -410,7 +410,7 @@ export class SelectItems implements AfterViewInit, OnInit {
     // -------------------------------------------------------------------------
     // Accessors
     // -------------------------------------------------------------------------
-    
+
     get displayedItems() {
         return this.getItems();
     }

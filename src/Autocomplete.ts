@@ -10,7 +10,7 @@ import {
     Optional, EventEmitter, Output, ViewChild
 } from "@angular/core";
 import {NG_VALIDATORS, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs";
 import {SelectValueAccessor} from "./SelectValueAccessor";
 import {SelectValidator} from "./SelectValidator";
 import {Utils} from "./Utils";
@@ -388,10 +388,10 @@ export class Autocomplete implements OnInit {
 
     lastLoadTerm: string = "";
 
-    @ContentChild(AutocompleteDropdownTemplate)
+    @ContentChild(AutocompleteDropdownTemplate, {static: true})
     dropdownTemplate: AutocompleteDropdownTemplate;
 
-    @ViewChild(Dropdown)
+    @ViewChild(Dropdown, {static: true})
     dropdown: Dropdown;
 
     // -------------------------------------------------------------------------

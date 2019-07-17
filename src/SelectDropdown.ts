@@ -298,10 +298,10 @@ export class SelectDropdown {
     // Private Properties
     // -------------------------------------------------------------------------
 
-    @ViewChild(Dropdown)
+    @ViewChild(Dropdown, {static: true})
     dropdown: Dropdown;
 
-    @ViewChild("dropdownSelectItems")
+    @ViewChild("dropdownSelectItems", {static: true})
     selectItems: SelectItems;
 
     // -------------------------------------------------------------------------
